@@ -1,9 +1,19 @@
-import { Button, Form, Input, InputNumber, message, Modal, Table } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Modal,
+  Popconfirm,
+  Table,
+} from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 function UserManagement() {
-  // hiển thị data
   const columns = [
     {
       title: "ID",
@@ -15,27 +25,50 @@ function UserManagement() {
       dataIndex: "name",
       key: "name",
     },
-
     {
-      title: "Code",
-      dataIndex: "code",
-      key: "code",
+      title: "User's account",
+      dataIndex: "userId",
+      key: "userId",
     },
     {
-      title: "Score",
-      dataIndex: "score",
-      key: "score",
+      title: "User's password",
+      dataIndex: "password",
+      key: "password",
+    },
+    {
+      title: "Bonus Score",
+      dataIndex: "bonusScore",
+      key: "bonusScore",
+      sorter: (a, b) => a.bonusScore - b.bonusScore,
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
+      render: (id) => {
+        return (
+          <Popconfirm
+            onConfirm={() => handleDeleteByID(id)}
+            title="Delete"
+            description="Are you sure?"
+          >
+            <Button type="primary" danger>
+              Delete
+            </Button>
+          </Popconfirm>
+        );
+      },
     },
   ];
 
-  // tạo ra 1 cái biến đại diện cho cái form
   const [formVariable] = useForm();
-
-  // tạo ra useState để chỉnh sửa giá trị cho viển hiển thị MODAL
   const [visible, setVisible] = useState(false);
-  // store data
-  const [students, setStudents] = useState([]);
-  // không cho người dùng đụng vào khi đang trong create process
+  const [users, setUsers] = useState([]);
   const [submitting, setSubtmitting] = useState(false);
 
   const handleOpenModal = () => {
@@ -46,51 +79,47 @@ function UserManagement() {
     setVisible(false);
   };
 
-  // dành cho việc lấy data và truyển data từ MODAL
   const handleOKButton = () => {
     formVariable.submit();
   };
 
-  const api = "https://66f10f2141537919154f5539.mockapi.io/Student";
+  const api = "https://66f510f49aa4891f2a23b862.mockapi.io/UserManagement";
 
-  // get data from API
-  const fetchStudents = async () => {
+  const fetchUsers = async () => {
     try {
       const response = await axios.get(api);
-      console.log(response.data);
-      setStudents(response.data); // Gán dữ liệu vào state students
+      setUsers(response.data);
     } catch (error) {
-      console.error("Failed to fetch students:", error);
+      console.error("Failed to fetch users:", error);
     }
   };
-  // dependency array []
+
   useEffect(() => {
-    // action
-    // run any action <=> event
-    // [] => run when page loaded
-    // [number] => run when number adjusted
-    fetchStudents();
+    fetchUsers();
   }, []);
 
-  // get data values and close MODAL
-  const handleSubmitValue = async (student) => {
+  const handleSubmitValue = async (user) => {
     try {
       setSubtmitting(true);
-      // Gửi dữ liệu lên API
-      const response = await axios.post(api, student);
-
-      // Thêm sinh viên mới vào state students sau khi nhận phản hồi thành công
-      setStudents([...students, response.data]);
-      //   toast.success("Student added successfully!");
-
-      // Đóng Modal và reset form
+      const response = await axios.post(api, user);
+      setUsers([...users, response.data]);
       formVariable.resetFields();
       handleHideModal();
     } catch (error) {
       console.error(error);
-      //   toast.error("Failed to add student!");
     } finally {
       setSubtmitting(false);
+    }
+  };
+
+  const handleDeleteByID = async (userID) => {
+    try {
+      await axios.delete(`${api}/${userID}`);
+      toast.success("Delete successful");
+      fetchUsers();
+    } catch (error) {
+      console.error(error);
+      toast.error("Delete failed");
     }
   };
 
@@ -100,62 +129,53 @@ function UserManagement() {
         ADD
       </Button>
 
-      <Table dataSource={students} columns={columns} />
+      <Table dataSource={users} columns={columns} bordered />
 
       <Modal
-        title="Create New Student"
+        title="Create New User"
         open={visible}
         onCancel={handleHideModal}
         onOk={handleOKButton}
         confirmLoading={submitting}
       >
-        {/* bấm OK => submit form */}
-        {/* identify the form be assigned  (form ở giữa) */}
         <Form form={formVariable} onFinish={handleSubmitValue}>
-          {/* NAME */}
           <Form.Item
-            name={"name"} // Chuyển "variableName" thành "name"
-            label={"Student Name"}
+            name={"name"}
+            label={"User Name"}
             rules={[
               {
                 required: true,
-                message: "Djt me điền tên vào",
+                message: "Vui lòng điền tên vào",
               },
             ]}
           >
-            <Input></Input>
+            <Input />
           </Form.Item>
-          {/* Student CODE */}
           <Form.Item
-            name={"code"}
-            label={"Student Code"}
+            name={"userId"}
+            label={"User ID"}
             rules={[
               {
                 required: true,
-                message: "Djt me điền  vào",
-              },
-              {
-                pattern: "SE[0-9]{6}",
-                message: "Invalid code format",
+                message: "Vui lòng điền ID vào",
               },
             ]}
           >
-            <Input></Input>
+            <Input />
           </Form.Item>
-          {/* SCORE */}
           <Form.Item
-            name={"score"}
-            label={"Student Score"}
+            name={"bonusScore"}
+            label={"Bonus Score"}
             rules={[
               {
                 required: true,
-                message: "Djt me điền  vào",
+                message: "Vui lòng điền điểm vào",
               },
               {
-                type: Number,
+                type: "number",
                 min: 0,
                 max: 10,
-                message: "Invalid code format",
+                message: "Điểm không hợp lệ",
               },
             ]}
           >
@@ -166,4 +186,5 @@ function UserManagement() {
     </div>
   );
 }
+
 export default UserManagement;
