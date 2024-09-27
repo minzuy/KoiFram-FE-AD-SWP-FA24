@@ -13,7 +13,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-function UserManagement() {
+function UserManagementPage() {
   const columns = [
     {
       title: "ID",
@@ -187,4 +187,4 @@ function UserManagement() {
   );
 }
 
-export default UserManagement;
+export default UserManagementPage;
