@@ -1,0 +1,35 @@
+.containner {
+    color: whitesmoke;
+    width: 100vw;
+    height: 100vh;
+    background-color: antiquewhite; 
+    background-image: 
+    url('https://walltowallgraphics.com.au/wp-content/uploads/2022/06/2025186389_Cute_Stylised_Koi_Japanese_Carp_Fish_Outlines.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex; /* Sử dụng flexbox */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.form-box {
+    width: 400px;
+    margin: auto auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ed690b;
+    text-align: center;
+}
+.form-box h1 {
+    font-weight: bold;
+}
+.form-box button {
+    background-color: #ed690b;
+    border: #ed690b 1px;
+    font-weight: bold;
+    border-radius: 10px;
+    color: aliceblue;
+}

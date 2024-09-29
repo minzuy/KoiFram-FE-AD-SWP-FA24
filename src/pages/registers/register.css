@@ -1,0 +1,12 @@
+.show-role {
+    background-color: steelblue;
+    display: inline-block; /* Để kích thước của div vừa với nội dung */
+    padding: 10px 20px; /* Khoảng cách trong khung */
+    border-radius: 10px; /* Bo tròn góc */
+    color: white; /* Màu chữ */
+    font-size: 14px; /* Kích thước chữ */
+}
+.show-role p {
+    color: whitesmoke;
+    font-weight: bold;
+}
