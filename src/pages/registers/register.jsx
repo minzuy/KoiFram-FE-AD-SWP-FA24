@@ -2,6 +2,8 @@
 import "./register.css";
 import { Button, Form, Input } from "antd";
 import AuthenTemplate from "../../components/authentification/authen";
+import { toast } from "react-toastify";
+import api from "../../config/axios";
 
 function RegisterPage() {
   const [form] = Form.useForm();
@@ -12,18 +14,27 @@ function RegisterPage() {
     }
     return Promise.reject(new Error("The two passwords do not match!"));
   };
-
+  const handleRegister = async (values) => {
+    console.log(values); // Logging form values
+    try {
+      // submit data to BE <=> POST
+      // value.role = "ADMIN"
+      const response = await api.post("register", values);
+      toast.success("Registration successful!");
+      // chuyển hướng sang trang login
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error("Registration failed!");
+    }
+  };
   return (
     <AuthenTemplate>
       <h1>Register form</h1>
       <Form
         form={form}
-        labelCol={{
-          span: 24,
-        }}
-        onFinish={(values) => {
-          console.log(values);
-        }}
+        labelCol={{ span: 24 }}
+        onFinish={handleRegister} // Using only one onFinish handler
       >
         <Form.Item
           label={<span style={{ color: "white" }}>UserName</span>}

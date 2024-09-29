@@ -125,10 +125,11 @@ function UserManagementPage() {
 
   return (
     <div>
+      <h1>User Management</h1>
+      <br></br>
       <Button type="primary" onClick={handleOpenModal}>
         ADD
       </Button>
-
       <Table dataSource={users} columns={columns} bordered />
 
       <Modal
