@@ -8,19 +8,17 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
     key,
     icon,
     children,
-    label,
+    label: <Link to={`/admin/${key}`}>{label}</Link>,
   };
 }
 const items = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
   getItem("User", "user", <UserOutlined />),
   getItem("Fish", "fish", <ShoppingCartOutlined />),
 

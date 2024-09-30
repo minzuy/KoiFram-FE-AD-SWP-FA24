@@ -3,9 +3,11 @@ import AuthenTemplate from "../../components/authentification/authen";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../../config/axios";
+import { useState } from "react";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [submitting, setSubtmitting] = useState(false);
   const handleLogin = async (values) => {
     try {
       const respone = await api.post("login", values);
@@ -19,6 +21,8 @@ function LoginPage() {
     } catch (error) {
       toast.error(error.respone.data);
       console.log(error);
+    } finally {
+      setSubtmitting(false);
     }
   };
   return (
@@ -28,6 +32,7 @@ function LoginPage() {
         labelCol={{
           span: 24,
         }}
+        confirmLoading={submitting}
         onFinish={handleLogin}
       >
         <Form.Item
@@ -54,7 +59,9 @@ function LoginPage() {
         >
           <Input.Password />
         </Form.Item>
-        <Button type="primary">Login</Button>
+        <Button type="primary" htmlType="submit">
+          Login
+        </Button>
       </Form>
     </AuthenTemplate>
   );
