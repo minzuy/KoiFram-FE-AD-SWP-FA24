@@ -1,6 +1,7 @@
 import {
   Button,
   Form,
+  Image,
   Input,
   InputNumber,
   message,
@@ -39,12 +40,12 @@ function FishManagementPage() {
           value: "Category 1",
           children: [
             {
-              text: "Yellow",
-              value: "Yellow",
+              text: "category 1",
+              value: "category",
             },
             {
-              text: "Pink",
-              value: "Pink",
+              text: "category 2",
+              value: "category",
             },
           ],
         },
@@ -67,6 +68,14 @@ function FishManagementPage() {
       filterSearch: true,
       onFilter: (value, record) => record.name.includes(value),
       width: "17%",
+    },
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => {
+        return <Image src={image} alt="" width={200} />;
+      },
     },
     {
       title: "Type",
@@ -98,25 +107,25 @@ function FishManagementPage() {
       key: "weight",
       sorter: (a, b) => a.weight - b.weight,
     },
-
-    // {
-    //   title: "Image",
-    //   dataIndex: "image",
-    //   key: "image",
-    //   render: (image) => {
-    //     return <Image src={image} alt="" width={200} />;
-    //   },
-    // },
-
     {
       title: "Action",
       dataIndex: "id",
       key: "id", //=> Lấy data gì thì key p tương ứng
-      render: (id) => {
+      render: (id, category) => {
         // => muốn thay đổi thông tin hiển thị => AUTO : RENDER
         // render luôn p trùng với dataIndex
         return (
           <>
+            <Button
+              type="primary"
+              onClick={() => {
+                handleOpenModal(true);
+                formVariable.setFieldsValue(category);
+              }}
+            >
+              EDIT
+            </Button>
+
             <Popconfirm
               onConfirm={() => handleDeleteByID(id)}
               title="Delete"
@@ -136,6 +145,11 @@ function FishManagementPage() {
   const [visible, setVisible] = useState(false);
   const [fishes, setFishes] = useState([]);
   const [submitting, setSubtmitting] = useState(false);
+  // variable for Preview Image
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  // for FIREBASE
+  const [fileList, setFileList] = useState([]);
 
   const handleOpenModal = () => {
     setVisible(true);
@@ -164,11 +178,16 @@ function FishManagementPage() {
     fetchFishes();
   }, []);
 
+  // CREATE | EDIT
   const handleSubmitValue = async (fish) => {
     try {
       setSubtmitting(true);
-      const response = await axios.post(api, fish);
-      setFishes([...fishes, response.data]);
+      if (fish.id) {
+        const response = await axios.put(`${api}/${fish.id}`, fish); // Correct API call
+      } else {
+        const response = await axios.post(api, fish);
+      }
+      fetchFishes();
       formVariable.resetFields();
       handleHideModal();
     } catch (error) {
@@ -188,10 +207,32 @@ function FishManagementPage() {
       toast.error("Delete failed");
     }
   };
-
+  const getBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  // ant design
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+  };
+  // tạo ra danh sách lưu trữ
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   return (
     <div>
-      <Button type="primary" onClick={handleOpenModal}>
+      <Button
+        type="primary"
+        onClick={() => {
+          formVariable.resetFields(); // Reset form khi nhấn "ADD"
+          handleOpenModal(true);
+        }}
+      >
         ADD
       </Button>
 
@@ -217,18 +258,32 @@ function FishManagementPage() {
           >
             <Input />
           </Form.Item>
+
           <Form.Item
-            name={"species"}
-            label={"Species"}
+            name={"category"}
+            label={"Category"}
             rules={[
               {
                 required: true,
-                message: "Vui lòng điền loài cá vào",
+                message: "Vui lòng điền thể loại cá vào",
               },
             ]}
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            name={"type"}
+            label={"Fish Type"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền loại cá vào",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
           <Form.Item
             name={"weight"}
             label={"Fish Weight (kg)"}
@@ -246,6 +301,7 @@ function FishManagementPage() {
           >
             <InputNumber step={0.1} />
           </Form.Item>
+
           <Form.Item
             name={"age"}
             label={"Fish Age (years)"}
