@@ -83,11 +83,19 @@ const AdminHomePage = () => {
             paddingRight: 20,
           }}
         >
-          <Space>
+          <Space
+            style={{
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
             <div>
-              <h2>Welcome, {userName}</h2>
+              <h2 style={{ color: "#1677ff", textAlign: "center", margin: 0 }}>
+                Welcome, {userName}
+              </h2>
             </div>
-            <br></br>
             <div>
               <Button
                 type="primary"
@@ -99,6 +107,7 @@ const AdminHomePage = () => {
             </div>
           </Space>
         </Header>
+
         <Content
           style={{
             margin: "0 16px",

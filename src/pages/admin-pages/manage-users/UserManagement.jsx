@@ -12,6 +12,7 @@ import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import "./index.css";
 
 function UserManagementPage() {
   const columns = [
@@ -50,17 +51,28 @@ function UserManagementPage() {
       title: "Action",
       dataIndex: "id",
       key: "id",
-      render: (id) => {
+      render: (id, user) => {
         return (
-          <Popconfirm
-            onConfirm={() => handleDeleteByID(id)}
-            title="Delete"
-            description="Are you sure?"
-          >
-            <Button type="primary" danger>
-              Delete
+          <>
+            <Button
+              type="primary"
+              onClick={() => {
+                handleOpenModal(true);
+                formVariable.setFieldsValue(user); // Load dữ liệu user vào form
+              }}
+            >
+              EDIT
             </Button>
-          </Popconfirm>
+            <Popconfirm
+              onConfirm={() => handleDeleteByID(id)}
+              title="Delete"
+              description="Are you sure?"
+            >
+              <Button type="primary" danger>
+                Delete
+              </Button>
+            </Popconfirm>
+          </>
         );
       },
     },
@@ -69,7 +81,7 @@ function UserManagementPage() {
   const [formVariable] = useForm();
   const [visible, setVisible] = useState(false);
   const [users, setUsers] = useState([]);
-  const [submitting, setSubtmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleOpenModal = () => {
     setVisible(true);
@@ -100,15 +112,19 @@ function UserManagementPage() {
 
   const handleSubmitValue = async (user) => {
     try {
-      setSubtmitting(true);
-      const response = await axios.post(api, user);
-      setUsers([...users, response.data]);
+      setSubmitting(true);
+      if (user.id) {
+        const response = await axios.put(`${api}/${user.id}`, user); // Correct API call
+      } else {
+        const response = await axios.post(api, user);
+      }
+      fetchUsers();
       formVariable.resetFields();
       handleHideModal();
     } catch (error) {
       console.error(error);
     } finally {
-      setSubtmitting(false);
+      setSubmitting(false);
     }
   };
 
@@ -124,16 +140,17 @@ function UserManagementPage() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>User Management</h1>
-      <br></br>
-      <Button type="primary" onClick={handleOpenModal}>
-        ADD
-      </Button>
-      <Table dataSource={users} columns={columns} bordered />
+      <Table
+        dataSource={users}
+        columns={columns}
+        bordered
+        className="custom-table-border"
+      />
 
       <Modal
-        title="Create New User"
+        title="Manage User"
         open={visible}
         onCancel={handleHideModal}
         onOk={handleOKButton}
@@ -165,6 +182,18 @@ function UserManagementPage() {
             <Input />
           </Form.Item>
           <Form.Item
+            name={"password"}
+            label={"Password"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền mật khẩu vào",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
             name={"bonusScore"}
             label={"Bonus Score"}
             rules={[
@@ -181,6 +210,18 @@ function UserManagementPage() {
             ]}
           >
             <InputNumber step={0.1} />
+          </Form.Item>
+          <Form.Item
+            name={"address"}
+            label={"Address"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền địa chỉ vào",
+              },
+            ]}
+          >
+            <Input />
           </Form.Item>
         </Form>
       </Modal>

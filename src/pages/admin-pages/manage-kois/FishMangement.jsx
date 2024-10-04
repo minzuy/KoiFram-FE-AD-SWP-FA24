@@ -30,44 +30,44 @@ function FishManagementPage() {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      filters: [
-        {
-          text: "Joe",
-          value: "Joe",
-        },
-        {
-          text: "Category 1",
-          value: "Category 1",
-          children: [
-            {
-              text: "category 1",
-              value: "category",
-            },
-            {
-              text: "category 2",
-              value: "category",
-            },
-          ],
-        },
-        {
-          text: "Category 2",
-          value: "Category 2",
-          children: [
-            {
-              text: "Green",
-              value: "Green",
-            },
-            {
-              text: "Black",
-              value: "Black",
-            },
-          ],
-        },
-      ],
-      filterMode: "tree",
-      filterSearch: true,
-      onFilter: (value, record) => record.name.includes(value),
-      width: "17%",
+      // filters: [
+      //   {
+      //     text: "Joe",
+      //     value: "Joe",
+      //   },
+      //   {
+      //     text: "Category 1",
+      //     value: "Category 1",
+      //     children: [
+      //       {
+      //         text: "category 1",
+      //         value: "category",
+      //       },
+      //       {
+      //         text: "category 2",
+      //         value: "category",
+      //       },
+      //     ],
+      // },
+      //   {
+      //     text: "Category 2",
+      //     value: "Category 2",
+      //     children: [
+      //       {
+      //         text: "Green",
+      //         value: "Green",
+      //       },
+      //       {
+      //         text: "Black",
+      //         value: "Black",
+      //       },
+      //     ],
+      //   },
+      // ],
+      // filterMode: "tree",
+      // filterSearch: true,
+      // onFilter: (value, record) => record.name.includes(value),
+      // width: "17%",
     },
     {
       title: "Image",
@@ -184,14 +184,17 @@ function FishManagementPage() {
       setSubtmitting(true);
       if (fish.id) {
         const response = await axios.put(`${api}/${fish.id}`, fish); // Correct API call
+        toast.success("Edit successfully");
       } else {
         const response = await axios.post(api, fish);
+        toast.success("Create successfully");
       }
       fetchFishes();
       formVariable.resetFields();
       handleHideModal();
     } catch (error) {
       console.error(error);
+      toast.error("FAILED");
     } finally {
       setSubtmitting(false);
     }
