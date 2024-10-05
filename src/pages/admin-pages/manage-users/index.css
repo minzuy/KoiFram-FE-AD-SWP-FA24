@@ -2,15 +2,6 @@
   .container h1 {
     text-align: center;
     font-family: monospace;
+    color: rgb(22, 119, 255);
+    margin-bottom: 10px;
   }
-  .custom-table-border .ant-table {
-    border-color: black;
-  }
-  .custom-table-border .ant-table-thead > tr > th {
-    background-color: azure;
-  }
-  .custom-table-border .ant-table-thead > tr > th, 
-  .custom-table-border .ant-table-tbody > tr > td {
-    border: 2px solid seagreen; /* Điều chỉnh viền cho các ô */
-  }
-  

@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button, Space } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-
+import "./index.css";
 const { Header, Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -25,11 +25,12 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem("User", "user", <UserOutlined />),
   getItem("Fish", "fish", <ShoppingCartOutlined />),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
+  // getItem("Team", "sub2", <TeamOutlined />, [
+  //   getItem("Team 1", "6"),
+  //   getItem("Team 2", "8"),
+  // ]),
+  getItem("Staff", "register", <DesktopOutlined />),
+  getItem("Order", "order", <FileOutlined />),
 ];
 
 const AdminHomePage = () => {
@@ -39,7 +40,7 @@ const AdminHomePage = () => {
   } = theme.useToken();
 
   // Lấy username từ localStorage
-  const userName = localStorage.getItem("userName");
+  const userId = localStorage.getItem("userId");
 
   // Điều hướng khi nhấn Logout
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const AdminHomePage = () => {
   const handleLogout = () => {
     // Xóa token và user info khỏi localStorage
     localStorage.removeItem("token");
-    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
 
     // Điều hướng về trang đăng nhập
     navigate("/login");
@@ -76,7 +77,7 @@ const AdminHomePage = () => {
         <Header
           style={{
             padding: 0,
-            background: colorBgContainer,
+            backgroundColor: "#002140",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -91,12 +92,8 @@ const AdminHomePage = () => {
               width: "100%",
             }}
           >
-            <div>
-              <h2 style={{ color: "#1677ff", textAlign: "center", margin: 0 }}>
-                Welcome, {userName}
-              </h2>
-            </div>
-            <div>
+            <div className="admin-header">
+              <h2>Welcome, {userId}</h2>
               <Button
                 type="primary"
                 icon={<LogoutOutlined />}
@@ -107,20 +104,7 @@ const AdminHomePage = () => {
             </div>
           </Space>
         </Header>
-
-        <Content
-          style={{
-            margin: "0 16px",
-          }}
-        >
-          <Breadcrumb
-            style={{
-              margin: "16px 0",
-            }}
-          >
-            <Breadcrumb.Item>Object</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-          </Breadcrumb>
+        <Content className="admin-content">
           <div
             style={{
               padding: 24,
@@ -135,6 +119,9 @@ const AdminHomePage = () => {
         <Footer
           style={{
             textAlign: "center",
+            backgroundColor: "#F28705",
+            fontWeight: "bold",
+            color: "white",
           }}
         >
           @FPTU HCM

@@ -4,41 +4,37 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const api = "https://66fce102c3a184a84d183d14.mockapi.io/Account";
+  const dispatch = useDispatch();
 
   const handleLogin = async (values) => {
     setSubmitting(true);
     try {
-      // Fetch all users from the API
-      const response = await axios.get(api);
-      const users = response.data;
+      // Gửi yêu cầu POST với userId và password
+      const response = await axios.post(api, {
+        userID: values.userId,
+        password: values.password,
+      });
+      dispatch(api(response.data));
+      const { roleId, token } = response.data;
+      console.log(response.data);
+      // Lưu token vào localStorage
+      localStorage.setItem("token", token);
 
-      // Find the user that matches the entered userId and password
-      const user = users.find(
-        (u) => u.userID === values.userId && u.password === values.password
-      );
-
-      if (user) {
-        // Nếu user tìm thấy, lưu token và điều hướng
-        toast.success("Login Successful!");
-        localStorage.setItem("token", "fake-jwt-token");
-
-        // Điều hướng dựa trên roleId
-        if (user.roleId === "ADMIN") {
-          navigate("/admin");
-        } else {
-          navigate("/user");
-        }
+      // Điều hướng dựa trên roleId
+      if (roleId === "ADMIN" || roleId === "MANAGER") {
+        navigate("/admin");
       } else {
-        // Nếu không tìm thấy, hiển thị thông báo lỗi
-        toast.error("Invalid user ID or password");
+        navigate("/admin");
       }
+      toast.success("Login Successful!");
     } catch (error) {
-      toast.error("An error occurred during login");
+      toast.error("Invalid user ID or password");
       console.log(error);
     } finally {
       setSubmitting(false);

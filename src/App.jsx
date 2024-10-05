@@ -4,9 +4,15 @@ import UserManagementPage from "./pages/admin-pages/manage-users/UserManagement"
 import FishManagementPage from "./pages/admin-pages/manage-kois/FishMangement";
 import AdminHomePage from "./components/admin-dashboard/admin";
 import LoginPage from "./pages/logins/login";
+import OrderPage from "./pages/admin-pages/manage-order/Order";
+import Test from "./test";
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "test",
+      element: <Test />,
+    },
     {
       path: "",
       element: <LoginPage />,
@@ -14,18 +20,6 @@ function App() {
     {
       path: "login",
       element: <LoginPage />,
-    },
-    {
-      path: "register",
-      element: <RegisterPage />,
-    },
-    {
-      path: "user-manage",
-      element: <UserManagementPage />,
-    },
-    {
-      path: "fish-manage",
-      element: <FishManagementPage />,
     },
     {
       path: "admin",
@@ -39,9 +33,18 @@ function App() {
           path: "fish",
           element: <FishManagementPage />,
         },
+        {
+          path: "register",
+          element: <RegisterPage />,
+        },
+        {
+          path: "order",
+          element: <OrderPage />,
+        },
       ],
     },
   ]);
+
   return <RouterProvider router={router} />;
 }
 

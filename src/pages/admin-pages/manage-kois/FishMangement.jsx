@@ -229,6 +229,7 @@ function FishManagementPage() {
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   return (
     <div>
+      <h1>Fish Management</h1>
       <Button
         type="primary"
         onClick={() => {

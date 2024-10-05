@@ -18,13 +18,13 @@ function UserManagementPage() {
   const columns = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "Id",
+      key: "Id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Username",
+      dataIndex: "Username",
+      key: "Username",
     },
     {
       title: "User's account",
@@ -37,21 +37,41 @@ function UserManagementPage() {
       key: "password",
     },
     {
-      title: "Bonus Score",
-      dataIndex: "bonusScore",
-      key: "bonusScore",
-      sorter: (a, b) => a.bonusScore - b.bonusScore,
+      title: "User's name",
+      dataIndex: "Name",
+      key: "Name",
+    },
+    {
+      title: "Point",
+      dataIndex: "Point",
+      key: "Point",
+      sorter: (a, b) => a.Point - b.Point, // Thay đổi từ bonusScore thành point
     },
     {
       title: "Address",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "Address",
+      key: "Address",
+    },
+    {
+      title: "Created At",
+      dataIndex: "CreateAt",
+      key: "CreateAt",
+    },
+    {
+      title: "Status",
+      dataIndex: "Status",
+      key: "Status",
+    },
+    {
+      title: "Phone",
+      dataIndex: "Phone",
+      key: "Phone",
     },
     {
       title: "Action",
-      dataIndex: "id",
-      key: "id",
-      render: (id, user) => {
+      dataIndex: "Id",
+      key: "Id",
+      render: (Id, user) => {
         return (
           <>
             <Button
@@ -64,12 +84,12 @@ function UserManagementPage() {
               EDIT
             </Button>
             <Popconfirm
-              onConfirm={() => handleDeleteByID(id)}
+              onConfirm={() => handleDeleteByID(Id)}
               title="Delete"
               description="Are you sure?"
             >
               <Button type="primary" danger>
-                Delete
+                DELETE
               </Button>
             </Popconfirm>
           </>
@@ -158,8 +178,8 @@ function UserManagementPage() {
       >
         <Form form={formVariable} onFinish={handleSubmitValue}>
           <Form.Item
-            name={"name"}
-            label={"User Name"}
+            name={"Username"}
+            label={"Username"}
             rules={[
               {
                 required: true,
@@ -182,6 +202,18 @@ function UserManagementPage() {
             <Input />
           </Form.Item>
           <Form.Item
+            name={"Name"}
+            label={"Name"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền tên vào",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             name={"password"}
             label={"Password"}
             rules={[
@@ -194,8 +226,8 @@ function UserManagementPage() {
             <Input.Password />
           </Form.Item>
           <Form.Item
-            name={"bonusScore"}
-            label={"Bonus Score"}
+            name={"Point"}
+            label={"Point"}
             rules={[
               {
                 required: true,
@@ -204,20 +236,44 @@ function UserManagementPage() {
               {
                 type: "number",
                 min: 0,
-                max: 10,
+                max: 100,
                 message: "Điểm không hợp lệ",
               },
             ]}
           >
-            <InputNumber step={0.1} />
+            <InputNumber />
           </Form.Item>
           <Form.Item
-            name={"address"}
+            name={"Address"}
             label={"Address"}
             rules={[
               {
                 required: true,
                 message: "Vui lòng điền địa chỉ vào",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name={"Status"}
+            label={"Status"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền trạng thái vào",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name={"Phone"}
+            label={"Phone"}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền số điện thoại vào",
               },
             ]}
           >
