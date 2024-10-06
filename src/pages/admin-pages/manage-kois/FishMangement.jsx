@@ -8,11 +8,13 @@ import {
   Modal,
   Popconfirm,
   Table,
+  Upload,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import uploadFile from "../../../utils/file";
 
 function FishManagementPage() {
   const columns = [
@@ -151,6 +153,24 @@ function FishManagementPage() {
   // for FIREBASE
   const [fileList, setFileList] = useState([]);
 
+  const uploadButton = (
+    <button
+      style={{
+        border: 0,
+        background: "none",
+      }}
+      type="button"
+    >
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </button>
+  );
+
   const handleOpenModal = () => {
     setVisible(true);
   };
@@ -180,8 +200,15 @@ function FishManagementPage() {
 
   // CREATE | EDIT
   const handleSubmitValue = async (fish) => {
+    if (fileList.length > 0) {
+      // Upload ảnh lên Firebase trước
+      const file = fileList[0].originFileObj;
+      const imageUrl = await uploadFile(file);
+      fish.image = imageUrl; // Thêm URL ảnh vào đối tượng fish
+    }
     try {
       setSubtmitting(true);
+
       if (fish.id) {
         const response = await axios.put(`${api}/${fish.id}`, fish); // Correct API call
         toast.success("Edit successfully");
@@ -274,6 +301,18 @@ function FishManagementPage() {
             ]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item label={"image"} name={"image"}>
+            {/* Upload của ANT DESIGN */}
+            <Upload
+              action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+            >
+              {fileList.length >= 8 ? null : uploadButton}
+            </Upload>
           </Form.Item>
           <Form.Item
             name={"type"}

@@ -7,6 +7,8 @@ import {
   UserOutlined,
   ShoppingCartOutlined,
   LogoutOutlined,
+  ReconciliationTwoTone,
+  IdcardOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button, Space } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
@@ -23,14 +25,14 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("User", "user", <UserOutlined />),
+  getItem("User", "user", <IdcardOutlined />),
   getItem("Fish", "fish", <ShoppingCartOutlined />),
   // getItem("Team", "sub2", <TeamOutlined />, [
   //   getItem("Team 1", "6"),
   //   getItem("Team 2", "8"),
   // ]),
   getItem("Staff", "register", <DesktopOutlined />),
-  getItem("Order", "order", <FileOutlined />),
+  getItem("Order", "order", <ReconciliationTwoTone />),
 ];
 
 const AdminHomePage = () => {
@@ -64,13 +66,21 @@ const AdminHomePage = () => {
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
+        style={{
+          backgroundColor: "#FAFBFB",
+          color: "#FAFBFB",
+          borderRight: "2px solid rgb(22, 119, 255)",
+        }}
       >
         <div className="demo-logo-vertical" />
         <Menu
-          theme="dark"
+          theme="light"
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          style={{
+            backgroundColor: "#FAFBFB",
+          }}
         />
       </Sider>
       <Layout>
@@ -81,7 +91,7 @@ const AdminHomePage = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            paddingRight: 20,
+            paddingRight: 0,
           }}
         >
           <Space
@@ -90,6 +100,7 @@ const AdminHomePage = () => {
               display: "flex",
               justifyContent: "center",
               width: "100%",
+              backgroundColor: "#F28705",
             }}
           >
             <div className="admin-header">
