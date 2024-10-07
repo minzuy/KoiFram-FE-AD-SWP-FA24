@@ -1,6 +1,6 @@
-// Account
+// Account - 79
 https://66fce102c3a184a84d183d14.mockapi.io/Account;
-// USER 
+// USER - Nebobo
 "https://66f510f49aa4891f2a23b862.mockapi.io/UserManagement";
-// FISH
+// FISH - RUN
 "https://66f7bc23b5d85f31a34378b6.mockapi.io/FishManagement";

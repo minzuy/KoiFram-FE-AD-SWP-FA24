@@ -6,6 +6,7 @@ import AdminHomePage from "./components/admin-dashboard/admin";
 import LoginPage from "./pages/logins/login";
 import OrderPage from "./pages/admin-pages/manage-order/Order";
 import Test from "./test";
+import AccountPage from "./pages/admin-pages/manage-account/account";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
         {
           path: "order",
           element: <OrderPage />,
+        },
+        {
+          path: "account",
+          element: <AccountPage />,
         },
       ],
     },

@@ -1,0 +1,14 @@
+/* index.css */
+
+.avatar-container {
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+  }
+  
+  .avatar-icon {
+    font-size: 60px; /* Kích thước biểu tượng */
+    color: #1890ff; /* Màu sắc biểu tượng */
+    border: 2px solid #1890ff; /* Đường viền màu xanh */
+    border-radius: 50%; /* Bo tròn biểu tượng */
+    padding: 10px; /* Khoảng cách giữa đường viền và biểu tượng */
+  }
+  

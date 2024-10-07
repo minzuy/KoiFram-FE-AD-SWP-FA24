@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import {
+  UserOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  LockOutlined,
+} from "@ant-design/icons";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -20,11 +26,13 @@ function LoginPage() {
         userID: values.userId,
         password: values.password,
       });
-      dispatch(api(response.data));
-      const { roleId, token } = response.data;
-      console.log(response.data);
-      // Lưu token vào localStorage
+
+      const { userID, roleId, token } = response.data;
+
+      // Lưu thông tin đăng nhập vào localStorage
       localStorage.setItem("token", token);
+      localStorage.setItem("userID", userID); // Lưu userID
+      localStorage.setItem("roleId", roleId); // Lưu roleId
 
       // Điều hướng dựa trên roleId
       if (roleId === "ADMIN" || roleId === "MANAGER") {
@@ -32,6 +40,7 @@ function LoginPage() {
       } else {
         navigate("/admin");
       }
+
       toast.success("Login Successful!");
     } catch (error) {
       toast.error("Invalid user ID or password");
@@ -57,24 +66,37 @@ function LoginPage() {
           rules={[
             {
               required: true,
-              message: "You must input your user ID",
+              message: (
+                <span style={{ color: "#F28705", fontWeight: "bold" }}>
+                  YOU MUST INPUT YOUR USER ID
+                </span>
+              ),
             },
           ]}
         >
-          <Input />
+          <Input prefix={<UserOutlined />} placeholder="Enter your userID" />
         </Form.Item>
+
         <Form.Item
           label={<span style={{ color: "white" }}>Password</span>}
           name="password"
           rules={[
             {
               required: true,
-              message: "You must input your password",
+              message: (
+                <span style={{ color: "#F28705", fontWeight: "bold" }}>
+                  YOU MUST INPUT YOUR PASSWORD
+                </span>
+              ),
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            prefix={<LockOutlined />}
+            placeholder="Enter your password"
+          />
         </Form.Item>
+
         <Button type="primary" htmlType="submit" loading={submitting}>
           Login
         </Button>

@@ -33,6 +33,7 @@ const items = [
   // ]),
   getItem("Staff", "register", <DesktopOutlined />),
   getItem("Order", "order", <ReconciliationTwoTone />),
+  getItem("Account", "account", <UserOutlined />),
 ];
 
 const AdminHomePage = () => {
@@ -42,7 +43,8 @@ const AdminHomePage = () => {
   } = theme.useToken();
 
   // Lấy username từ localStorage
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userID");
+  const username = localStorage.getItem("userName");
 
   // Điều hướng khi nhấn Logout
   const navigate = useNavigate();
@@ -104,7 +106,7 @@ const AdminHomePage = () => {
             }}
           >
             <div className="admin-header">
-              <h2>Welcome, {userId}</h2>
+              <h2>Welcome, {username}</h2>
               <Button
                 type="primary"
                 icon={<LogoutOutlined />}
