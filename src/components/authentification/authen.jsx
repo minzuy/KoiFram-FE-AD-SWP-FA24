@@ -1,5 +1,5 @@
 import "./authen.css";
-import vidPg from "../images-vid/vid.mp4";
+import vidPg from "../images-vid/koi3D.mp4";
 
 function AuthenTemplate({ children }) {
   return (
