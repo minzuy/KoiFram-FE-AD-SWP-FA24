@@ -33,44 +33,44 @@ function FishManagementPage() {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      // filters: [
-      //   {
-      //     text: "Joe",
-      //     value: "Joe",
-      //   },
-      //   {
-      //     text: "Category 1",
-      //     value: "Category 1",
-      //     children: [
-      //       {
-      //         text: "category 1",
-      //         value: "category",
-      //       },
-      //       {
-      //         text: "category 2",
-      //         value: "category",
-      //       },
-      //     ],
-      // },
-      //   {
-      //     text: "Category 2",
-      //     value: "Category 2",
-      //     children: [
-      //       {
-      //         text: "Green",
-      //         value: "Green",
-      //       },
-      //       {
-      //         text: "Black",
-      //         value: "Black",
-      //       },
-      //     ],
-      //   },
-      // ],
-      // filterMode: "tree",
-      // filterSearch: true,
-      // onFilter: (value, record) => record.name.includes(value),
-      // width: "17%",
+      filters: [
+        {
+          text: "Joe",
+          value: "Joe",
+        },
+        {
+          text: "Category 1",
+          value: "Category 1",
+          children: [
+            {
+              text: "category 1",
+              value: "category",
+            },
+            {
+              text: "category 2",
+              value: "category",
+            },
+          ],
+        },
+        {
+          text: "Category 2",
+          value: "Category 2",
+          children: [
+            {
+              text: "Green",
+              value: "Green",
+            },
+            {
+              text: "Black",
+              value: "Black",
+            },
+          ],
+        },
+      ],
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.name.includes(value),
+      width: "17%",
     },
     {
       title: "Image",

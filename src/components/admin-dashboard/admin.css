@@ -1,7 +1,7 @@
 .admin-header {
   display: flex;
   align-items: center;
-  background-color: #205d96;
+  background-color: #005B9A;
   padding: 10px 20px;
   border-bottom: 1px solid #1677ff;
   gap: 5px; /* Thêm khoảng cách giữa các thành phần */
@@ -24,17 +24,51 @@
   background-color: #FAFBFB;
   
 }
-.admin-header button {
-  background-color: #1677ff!important;
-  color: #FAFBFB;
-}
-.admin-header button:hover {
-  background-color: seagreen;
-}
+
 .admin-header icon {
   color: #000 !important;
 }
 .ant-layout-sider-trigger {
   background-color: #1677ff !important; 
   border-right: 2px solid #1677ff;
+}
+
+/* Header */
+.ant-layout-header {
+  background-color: #1d3a5f; /* Màu xanh đậm hơn */
+  border-bottom: 2px solid #1677ff; /* Đường viền phía dưới */
+}
+
+/* Footer */
+.ant-layout-footer {
+  background-color: #1677ff; /* Màu tương tự như header */
+  color: #FAFBFB; /* Màu chữ trắng */
+}
+@keyframes scroll-text {
+  0% {
+    transform: translateX(100%); /* Bắt đầu từ ngoài khung bên phải */
+  }
+  100% {
+    transform: translateX(-100%); /* Chạy ra khỏi khung bên trái */
+  }
+}
+
+.admin-content {
+  overflow: hidden !important; /* Giới hạn nội dung trong khung chứa */
+  white-space: nowrap !important; /* Đảm bảo nội dung không xuống dòng */
+  position: relative !important;
+  width: 100%; /* Đảm bảo nội dung chiếm hết chiều ngang */
+}
+
+.admin-content p {
+  display: inline-block !important;
+  white-space: nowrap !important; /* Không cho phép xuống dòng */
+  animation: scroll-text 10s linear infinite !important; /* Hiệu ứng cuộn liên tục trong 10 giây */
+  font-size: 20px;
+  color: #1677ff; /* Bạn có thể điều chỉnh màu chữ theo ý muốn */
+  border-radius: 10px;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-weight: bold;
+  width: 100%; /* Điều chỉnh để chiếm hết chiều ngang admin-content */
 }

@@ -1,92 +1,142 @@
+/* Định dạng container chính */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Màu nền nhạt */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho container */
+  border-radius: 10px;
+}
+
 /* Định dạng tiêu đề h1 */
 .container h1 {
   text-align: center;
-  font-family: 'Poppins', sans-serif; /* Font chữ hiện đại */
-  color: rgb(22, 119, 255);
-  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #1677ff;
+  margin-bottom: 30px;
   font-weight: bold;
-  text-transform: uppercase; /* Chữ in hoa */
-  letter-spacing: 2px; /* Khoảng cách giữa các chữ cái */
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 /* Định dạng cho các nút hành động (Edit, Delete) */
 .action-buttons {
   display: flex;
-  gap: 10px; /* Tạo khoảng cách 10px giữa các nút */
+  gap: 15px;
+  justify-content: center; /* Canh giữa các nút */
 }
 
 /* Nút Edit */
 .action-buttons .ant-btn-primary {
-  background-color: #4CAF50; /* Màu xanh lá cho nút Edit */
+  background-color: #4CAF50;
   border-color: #4CAF50;
   transition: all 0.3s ease;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .action-buttons .ant-btn-primary:hover {
-  background-color: #45a049; /* Màu xanh lá đậm khi hover */
+  background-color: #45a049;
   border-color: #45a049;
 }
 
 /* Nút Delete */
 .action-buttons .ant-btn-dangerous {
-  background-color: #f44336; /* Màu đỏ cho nút Delete */
+  background-color: #f44336;
   border-color: #f44336;
   transition: all 0.3s ease;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .action-buttons .ant-btn-dangerous:hover {
-  background-color: #d32f2f; /* Màu đỏ đậm khi hover */
+  background-color: #d32f2f;
   border-color: #d32f2f;
 }
 
-/* Bảng User Management */
+/* Định dạng cho bảng User Management */
+.ant-table {
+  background-color: #ffffff; /* Màu nền trắng */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
 .ant-table-thead > tr > th {
-  background-color: #1677ff; /* Màu nền cho header bảng */
-  color: white; /* Chữ trắng */
+  background-color: #1677ff;
+  color: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
 }
 
 .ant-table-tbody > tr > td {
-  text-align: center; /* Canh giữa nội dung bảng */
+  text-align: center;
   font-family: 'Arial', sans-serif;
-  padding: 12px;
+  padding: 15px;
   transition: background-color 0.3s ease;
 }
 
 .ant-table-tbody > tr:hover > td {
-  background-color: #f0f8ff; /* Tô màu nền khi hover trên hàng */
+  background-color: #e6f7ff; /* Màu nền khi hover */
 }
 
-/* Modal Quản lý người dùng */
+/* Định dạng cho Modal Quản lý người dùng */
 .ant-modal-title {
   font-family: 'Poppins', sans-serif;
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
   color: #1677ff;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .ant-modal-body {
-  padding: 20px;
-  background-color: #f7faff; /* Màu nền nhẹ nhàng */
-  border-radius: 8px;
+  padding: 25px;
+  background-color: #f7faff;
+  border-radius: 10px;
+}
+
+/* Định dạng các input form */
+.ant-form-item label {
+  font-weight: bold;
+  color: #333;
+}
+
+.ant-input,
+.ant-input-number,
+.ant-input-password {
+  border-radius: 5px;
+  border: 1px solid #1677ff;
+}
+
+.ant-input:focus,
+.ant-input-number:focus,
+.ant-input-password:focus {
+  box-shadow: 0 0 8px rgba(22, 119, 255, 0.3);
 }
 
 /* Nút OK và Cancel trong Modal */
 .ant-modal-footer .ant-btn-primary {
   background-color: #1677ff;
   border-color: #1677ff;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 .ant-modal-footer .ant-btn-default {
   color: #1677ff;
   border-color: #1677ff;
+  font-weight: bold;
 }
 
-.ant-modal-footer .ant-btn:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+.ant-modal-footer .ant-btn-default:hover {
+  background-color: #f0f8ff;
+  border-color: #1677ff;
 }

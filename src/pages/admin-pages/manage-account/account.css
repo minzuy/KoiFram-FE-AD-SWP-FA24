@@ -5,10 +5,10 @@
   }
   
   .avatar-icon {
-    font-size: 60px; /* Kích thước biểu tượng */
-    color: #1890ff; /* Màu sắc biểu tượng */
-    border: 2px solid #1890ff; /* Đường viền màu xanh */
-    border-radius: 50%; /* Bo tròn biểu tượng */
-    padding: 10px; /* Khoảng cách giữa đường viền và biểu tượng */
+    font-size: 80px;
+    color: #ffffff; /* Màu của biểu tượng */
+    background-color: #1890ff; /* Màu nền của avatar */
+    border-radius: 50%; /* Bo tròn hoàn toàn */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Đổ bóng avatar */
   }
-  

@@ -19,3 +19,11 @@
 .edit-button:hover {
   background-color: darkgreen; /* Màu khi hover */
 }
+/* Xóa màu phông nền của form */
+.ant-modal-content {
+  background-color: #FAFBFB !important;
+}
+
+.ant-modal-body {
+  background-color: #FAFBFB !important; /* Màu nền trong suốt */
+}

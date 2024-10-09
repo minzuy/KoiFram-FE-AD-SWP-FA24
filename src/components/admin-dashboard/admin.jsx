@@ -27,11 +27,16 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("Users", "user", <IdcardOutlined />),
-  getItem("Fish", "fish", <ShoppingCartOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
-  ]),
+  getItem(
+    "Fish",
+    "fish",
+    <ShoppingCartOutlined />
+    //   [
+    //   getItem("Item1", "3"),
+    //   getItem("Item2", "4"),
+    //   getItem("Item3", "5"),
+    // ]
+  ),
   getItem("Order", "order", <ReconciliationTwoTone />),
   getItem("Account", "account", <UserOutlined />),
 ];
@@ -94,7 +99,7 @@ const AdminHomePage = () => {
         <Header
           style={{
             padding: 0,
-            backgroundColor: "#002140",
+            backgroundColor: "#82CAFA",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -113,10 +118,14 @@ const AdminHomePage = () => {
             <div className="admin-header">
               <UserOutlined />
               <h2>Welcome, {username}</h2>
-              <Button icon={<LogoutOutlined />} onClick={handleLogout}>
-                LOGOUT
-              </Button>
             </div>
+            <Button
+              type="primary"
+              icon={<LogoutOutlined />}
+              onClick={handleLogout}
+            >
+              LOGOUT
+            </Button>
           </Space>
         </Header>
         <Content className="admin-content">
@@ -130,23 +139,28 @@ const AdminHomePage = () => {
           >
             {isContentVisible && (
               <div className="content-paragraph">
-                <h1>Dashboard</h1>
-                <p>Welcome to the Admin Panel!</p>
                 <p>
-                  Use the menu to navigate through different management
-                  sections.
+                  Welcome {username} to the Admin Panel ! Click on the left side
+                  of the Sidebar to continue your business !
+                </p>
+                <br></br>
+                <br></br>
+                <p>
+                  Xin chào {username} ! Hãy nhấp vào thanh bên trái để tiếp tục
+                  tác vụ của bạn !
                 </p>
               </div>
             )}
             <Outlet />
           </div>
         </Content>
+
         <Footer
           style={{
             textAlign: "center",
-            backgroundColor: "#FAFBFB",
+            backgroundColor: "#005B9A",
             fontWeight: "bold",
-            color: "#1677ff",
+            color: "#FAFBFB",
           }}
         >
           @FPTU HCM
