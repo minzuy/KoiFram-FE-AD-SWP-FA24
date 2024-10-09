@@ -13,6 +13,8 @@ import {
 import { Breadcrumb, Layout, Menu, theme, Button, Space } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./index.css";
+import vidPg from "../images-vid/koi3D.mp4";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -25,13 +27,13 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("User", "user", <IdcardOutlined />),
+  getItem("Users", "user", <IdcardOutlined />),
   getItem("Fish", "fish", <ShoppingCartOutlined />),
   // getItem("Team", "sub2", <TeamOutlined />, [
   //   getItem("Team 1", "6"),
   //   getItem("Team 2", "8"),
   // ]),
-  getItem("Staff", "register", <DesktopOutlined />),
+  // getItem("Staff", "register", <DesktopOutlined />),
   getItem("Order", "order", <ReconciliationTwoTone />),
   getItem("Account", "account", <UserOutlined />),
 ];
@@ -126,6 +128,9 @@ const AdminHomePage = () => {
               borderRadius: borderRadiusLG,
             }}
           >
+            <video autoPlay muted loop className="background-video">
+              <source src={vidPg} type="video/mp4" />
+            </video>
             <Outlet />
           </div>
         </Content>

@@ -1,0 +1,41 @@
+  
+  .container h1 {
+    text-align: center;
+    font-family: Georgia !important;
+    color: rgb(22, 119, 255);
+    margin-bottom: 10px;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 5px; /* Tạo khoảng cách 1px giữa các nút */
+  }
+  /* Style cho tiêu đề cột (th) */
+  th {
+    background-color: rgb(242, 135, 5) !important; /* Màu nền cho tiêu đề */
+    color: #FAFBFB !important; /* Màu chữ cho tiêu đề */
+    font-weight: bold !important;
+    border-right: 2px solid #FAFBFB !important; /* Đường kẻ dưới */
+  }
+  td {
+    border-right:2px solid gainsboro !important ;
+    border-bottom:2px solid gainsboro !important ;
+
+  }
+  /* Style cho hàng khi di chuột qua */
+  tr:hover td {
+    background-color: #74C69D !important; /* Màu nền khi hover */
+  }
+  
+
+  /* Responsive design cho bảng */
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px !important;
+    }
+  
+    th, td {
+      padding: 8px 5px !important;
+    }
+  }
+  

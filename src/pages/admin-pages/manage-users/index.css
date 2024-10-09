@@ -1,7 +1,11 @@
   
   .container h1 {
     text-align: center;
-    font-family: monospace;
+    font-family: Georgia !important;
     color: rgb(22, 119, 255);
     margin-bottom: 10px;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 5px; /* Tạo khoảng cách 1px giữa các nút */
   }

@@ -17,12 +17,20 @@
     font-family: monospace;
 }
 .ant-layout-sider-trigger {
-  background-color: #F28705 !important; /* Màu cam */
+  background-color: #F28705 !important; 
   border-right: 2px solid #1677ff;
 }
 .ant-menu-item .anticon {
-    border: 2px solid gray; /* Đường viền 1px màu xanh */
-    border-radius: 4px; /* Bo góc cho biểu tượng */
-    padding: 5px; /* Khoảng cách giữa đường viền và biểu tượng */
-    margin-right: 8px; /* Khoảng cách giữa icon và text */
+    border: 2px solid gray; 
+    border-radius: 4px; 
+    padding: 5px; 
+    margin-right: 8px; 
   }
+
+.background-video {
+  width: 70%; 
+  height: 70%; 
+  object-fit: cover; 
+  border-radius: inherit; 
+  overflow: hidden;
+}

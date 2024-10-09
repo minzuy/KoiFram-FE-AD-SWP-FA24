@@ -15,6 +15,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import uploadFile from "../../../utils/file";
+import "./index.css";
 
 function FishManagementPage() {
   const columns = [
@@ -76,7 +77,7 @@ function FishManagementPage() {
       dataIndex: "image",
       key: "image",
       render: (image) => {
-        return <Image src={image} alt="" width={200} />;
+        return <Image src={image} alt="" width={170} />;
       },
     },
     {
@@ -112,12 +113,10 @@ function FishManagementPage() {
     {
       title: "Action",
       dataIndex: "id",
-      key: "id", //=> Lấy data gì thì key p tương ứng
+      key: "id",
       render: (id, category) => {
-        // => muốn thay đổi thông tin hiển thị => AUTO : RENDER
-        // render luôn p trùng với dataIndex
         return (
-          <>
+          <div className="action-buttons">
             <Button
               type="primary"
               onClick={() => {
@@ -137,7 +136,7 @@ function FishManagementPage() {
                 Delete
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },
@@ -255,7 +254,7 @@ function FishManagementPage() {
   // tạo ra danh sách lưu trữ
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   return (
-    <div>
+    <div className="container">
       <h1>Fish Management</h1>
       <Button
         type="primary"
@@ -267,8 +266,9 @@ function FishManagementPage() {
         ADD
       </Button>
 
-      <Table dataSource={fishes} columns={columns} bordered />
+      <br></br>
 
+      <Table dataSource={fishes} columns={columns} bordered />
       <Modal
         title="Create New Fish"
         open={visible}

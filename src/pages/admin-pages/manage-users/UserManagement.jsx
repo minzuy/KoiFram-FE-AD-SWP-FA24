@@ -73,7 +73,7 @@ function UserManagementPage() {
       key: "Id",
       render: (Id, user) => {
         return (
-          <>
+          <div className="action-buttons">
             <Button
               type="primary"
               onClick={() => {
@@ -92,7 +92,7 @@ function UserManagementPage() {
                 DELETE
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },

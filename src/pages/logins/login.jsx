@@ -52,6 +52,11 @@ function LoginPage() {
 
   return (
     <AuthenTemplate>
+      {/* Thêm video nền */}
+      <video autoPlay muted loop className="background-video">
+        <source src="../../vid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <h1>Login Form</h1>
       <Form
         labelCol={{
@@ -61,13 +66,13 @@ function LoginPage() {
         onFinish={handleLogin}
       >
         <Form.Item
-          label={<span style={{ color: "white" }}>UserID</span>}
+          label={<span style={{ color: "rgb(242, 135, 5)" }}>UserID</span>}
           name="userId"
           rules={[
             {
               required: true,
               message: (
-                <span style={{ color: "#F28705", fontWeight: "bold" }}>
+                <span style={{ color: "rgb(4, 57, 131) ", fontWeight: "bold" }}>
                   YOU MUST INPUT YOUR USER ID
                 </span>
               ),
@@ -78,13 +83,18 @@ function LoginPage() {
         </Form.Item>
 
         <Form.Item
-          label={<span style={{ color: "white" }}>Password</span>}
+          label={<span style={{ color: "rgb(242, 135, 5)" }}>Password</span>}
           name="password"
           rules={[
             {
               required: true,
               message: (
-                <span style={{ color: "#F28705", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "rgb(4, 57, 131) ",
+                    fontWeight: "bold,",
+                  }}
+                >
                   YOU MUST INPUT YOUR PASSWORD
                 </span>
               ),
