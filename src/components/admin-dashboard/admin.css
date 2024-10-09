@@ -1,0 +1,40 @@
+.admin-header {
+  display: flex;
+  align-items: center;
+  background-color: #205d96;
+  padding: 10px 20px;
+  border-bottom: 1px solid #1677ff;
+  gap: 5px; /* Thêm khoảng cách giữa các thành phần */
+  border-radius: 20px;
+  color: rgb(22, 119, 255);
+}
+
+.admin-header h2 {
+  flex-grow: 1;
+  margin: 0;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-header .anticon {
+  margin-right: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: #FAFBFB;
+  
+}
+.admin-header button {
+  background-color: #1677ff!important;
+  color: #FAFBFB;
+}
+.admin-header button:hover {
+  background-color: seagreen;
+}
+.admin-header icon {
+  color: #000 !important;
+}
+.ant-layout-sider-trigger {
+  background-color: #1677ff !important; 
+  border-right: 2px solid #1677ff;
+}

@@ -10,10 +10,9 @@ import {
   ReconciliationTwoTone,
   IdcardOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme, Button, Space } from "antd";
+import { Layout, Menu, theme, Button, Space } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "./index.css";
-import vidPg from "../images-vid/koi3D.mp4";
+import "./admin.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -28,18 +27,19 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("Users", "user", <IdcardOutlined />),
-  getItem("Fish", "fish", <ShoppingCartOutlined />),
-  // getItem("Team", "sub2", <TeamOutlined />, [
-  //   getItem("Team 1", "6"),
-  //   getItem("Team 2", "8"),
-  // ]),
-  // getItem("Staff", "register", <DesktopOutlined />),
+  getItem("Fish", "fish", <ShoppingCartOutlined />, [
+    getItem("Tom", "3"),
+    getItem("Bill", "4"),
+    getItem("Alex", "5"),
+  ]),
   getItem("Order", "order", <ReconciliationTwoTone />),
   getItem("Account", "account", <UserOutlined />),
 ];
 
 const AdminHomePage = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedMenuKey, setSelectedMenuKey] = useState(null); // state theo dõi mục đã chọn
+  const [isContentVisible, setIsContentVisible] = useState(true); // State để quản lý hiển thị
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -52,12 +52,14 @@ const AdminHomePage = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Xóa token và user info khỏi localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-
-    // Điều hướng về trang đăng nhập
     navigate("/login");
+  };
+
+  const handleMenuClick = ({ key }) => {
+    setSelectedMenuKey(key); // Cập nhật khi mục menu được chọn
+    setIsContentVisible(false); // Ẩn đoạn nội dung khi có một mục menu được chọn
   };
 
   return (
@@ -82,6 +84,7 @@ const AdminHomePage = () => {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          onClick={handleMenuClick} // Bắt sự kiện khi bấm vào mục menu
           style={{
             backgroundColor: "#FAFBFB",
           }}
@@ -104,17 +107,14 @@ const AdminHomePage = () => {
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              backgroundColor: "#F28705",
+              backgroundColor: "#FAFBFB",
             }}
           >
             <div className="admin-header">
+              <UserOutlined />
               <h2>Welcome, {username}</h2>
-              <Button
-                type="primary"
-                icon={<LogoutOutlined />}
-                onClick={handleLogout}
-              >
-                Logout
+              <Button icon={<LogoutOutlined />} onClick={handleLogout}>
+                LOGOUT
               </Button>
             </div>
           </Space>
@@ -128,18 +128,25 @@ const AdminHomePage = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            <video autoPlay muted loop className="background-video">
-              <source src={vidPg} type="video/mp4" />
-            </video>
+            {isContentVisible && (
+              <div className="content-paragraph">
+                <h1>Dashboard</h1>
+                <p>Welcome to the Admin Panel!</p>
+                <p>
+                  Use the menu to navigate through different management
+                  sections.
+                </p>
+              </div>
+            )}
             <Outlet />
           </div>
         </Content>
         <Footer
           style={{
             textAlign: "center",
-            backgroundColor: "#F28705",
+            backgroundColor: "#FAFBFB",
             fontWeight: "bold",
-            color: "white",
+            color: "#1677ff",
           }}
         >
           @FPTU HCM

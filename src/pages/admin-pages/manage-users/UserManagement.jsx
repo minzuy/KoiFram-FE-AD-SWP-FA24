@@ -12,7 +12,7 @@ import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import "./index.css";
+import "./user.css";
 
 function UserManagementPage() {
   const columns = [

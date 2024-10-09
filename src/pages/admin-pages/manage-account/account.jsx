@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Card, message } from "antd";
 import { UserOutlined, LockOutlined, IdcardOutlined } from "@ant-design/icons";
-import "./index.css"; // Nhập file CSS để xử lý style
+import "./account.css"; // Nhập file CSS để xử lý style
 
 const AccountPage = () => {
   // Dữ liệu tài khoản hiện tại (lấy từ API và localStorage)
@@ -79,7 +79,12 @@ const AccountPage = () => {
   return (
     <Card
       title="Account Information"
-      style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }} // Căn giữa nội dung
+      style={{
+        maxWidth: 600,
+        margin: "0 auto",
+        textAlign: "center",
+        backgroundColor: "#FAFBFB",
+      }} // Căn giữa nội dung
     >
       {/* Hiển thị biểu tượng avatar */}
       <div className="avatar-container">

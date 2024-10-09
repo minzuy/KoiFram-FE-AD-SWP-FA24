@@ -1,0 +1,21 @@
+/* Style cho nút ADD */
+.add-button {
+  background-color: rgb(22, 119, 255) !important; /* Màu cho nút ADD */
+  color: #ffffff; /* Màu chữ */
+  border: none; /* Không có viền */
+}
+
+.add-button:hover {
+  background-color: rgb(17, 93, 204); /* Màu khi hover */
+}
+
+/* Style cho nút EDIT */
+.edit-button {
+  background-color: seagreen !important; /* Màu cho nút EDIT */
+  color: #ffffff; /* Màu chữ */
+  border: none; /* Không có viền */
+}
+
+.edit-button:hover {
+  background-color: darkgreen; /* Màu khi hover */
+}

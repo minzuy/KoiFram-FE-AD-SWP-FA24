@@ -5,12 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import {
-  UserOutlined,
-  MailOutlined,
-  PhoneOutlined,
-  LockOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import "./login.css"; // Import file CSS
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -53,64 +49,73 @@ function LoginPage() {
   return (
     <AuthenTemplate>
       {/* Thêm video nền */}
-      <video autoPlay muted loop className="background-video">
-        <source src="../../vid.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <h1>Login Form</h1>
-      <Form
-        labelCol={{
-          span: 24,
-        }}
-        confirmLoading={submitting}
-        onFinish={handleLogin}
-      >
-        <Form.Item
-          label={<span style={{ color: "rgb(242, 135, 5)" }}>UserID</span>}
-          name="userId"
-          rules={[
-            {
-              required: true,
-              message: (
-                <span style={{ color: "rgb(4, 57, 131) ", fontWeight: "bold" }}>
-                  YOU MUST INPUT YOUR USER ID
-                </span>
-              ),
-            },
-          ]}
-        >
-          <Input prefix={<UserOutlined />} placeholder="Enter your userID" />
-        </Form.Item>
+      <div className="login-container">
+        <video autoPlay muted loop className="background-video">
+          <source src="../../vid.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="login-form">
+          <h1>Login Form</h1>
+          <Form
+            labelCol={{
+              span: 24,
+            }}
+            confirmLoading={submitting}
+            onFinish={handleLogin}
+          >
+            <Form.Item
+              label={<span style={{ color: "rgb(4, 57, 131)" }}>UserID</span>}
+              name="userId"
+              rules={[
+                {
+                  required: true,
+                  message: (
+                    <span
+                      style={{ color: "rgb(242, 135, 5)", fontWeight: "bold" }}
+                    >
+                      YOU MUST INPUT YOUR USER ID
+                    </span>
+                  ),
+                },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined />}
+                placeholder="Enter your userID"
+              />
+            </Form.Item>
 
-        <Form.Item
-          label={<span style={{ color: "rgb(242, 135, 5)" }}>Password</span>}
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: (
-                <span
-                  style={{
-                    color: "rgb(4, 57, 131) ",
-                    fontWeight: "bold,",
-                  }}
-                >
-                  YOU MUST INPUT YOUR PASSWORD
-                </span>
-              ),
-            },
-          ]}
-        >
-          <Input.Password
-            prefix={<LockOutlined />}
-            placeholder="Enter your password"
-          />
-        </Form.Item>
+            <Form.Item
+              label={<span style={{ color: "rgb(4, 57, 131)" }}>Password</span>}
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: (
+                    <span
+                      style={{
+                        color: "rgb(242, 135, 5)",
+                        fontWeight: "bold,",
+                      }}
+                    >
+                      YOU MUST INPUT YOUR PASSWORD
+                    </span>
+                  ),
+                },
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Enter your password"
+              />
+            </Form.Item>
 
-        <Button type="primary" htmlType="submit" loading={submitting}>
-          Login
-        </Button>
-      </Form>
+            <Button type="primary" htmlType="submit" loading={submitting}>
+              Login
+            </Button>
+          </Form>
+        </div>
+      </div>
     </AuthenTemplate>
   );
 }
