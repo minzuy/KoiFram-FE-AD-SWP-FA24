@@ -20,24 +20,26 @@ function UserManagementPage() {
       title: "ID",
       dataIndex: "Id",
       key: "Id",
+      width: "5%",
     },
     {
       title: "Username",
       dataIndex: "Username",
       key: "Username",
+      width: "10%",
     },
     {
-      title: "User's account",
+      title: "Account",
       dataIndex: "userId",
       key: "userId",
     },
     {
-      title: "User's password",
+      title: "Password",
       dataIndex: "password",
       key: "password",
     },
     {
-      title: "User's name",
+      title: "Username",
       dataIndex: "Name",
       key: "Name",
     },
@@ -46,6 +48,7 @@ function UserManagementPage() {
       dataIndex: "Point",
       key: "Point",
       sorter: (a, b) => a.Point - b.Point, // Thay đổi từ bonusScore thành point
+      width: "7%",
     },
     {
       title: "Address",
@@ -61,6 +64,7 @@ function UserManagementPage() {
       title: "Status",
       dataIndex: "Status",
       key: "Status",
+      width: "7%",
     },
     {
       title: "Phone",
@@ -99,7 +103,7 @@ function UserManagementPage() {
             description="Are you sure?"
           >
             <Button type="primary" danger>
-              DISABLED
+              DISABLE
             </Button>
           </Popconfirm>
         );

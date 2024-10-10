@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Card, message } from "antd";
 import { UserOutlined, LockOutlined, IdcardOutlined } from "@ant-design/icons";
 import "./account.css"; // Nhập file CSS để xử lý style
+import { useEffect, useState } from "react";
 
 const AccountPage = () => {
   // Dữ liệu tài khoản hiện tại (lấy từ API và localStorage)

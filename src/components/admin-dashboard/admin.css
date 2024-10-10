@@ -18,7 +18,7 @@
 
 .admin-header .anticon {
   margin-right: 12px;
-  border: 2px solid #fff;
+  border: 2px solid rgb(0, 91, 154);
   border-radius: 50%;
   padding: 5px;
   background-color: #FAFBFB;
@@ -30,7 +30,7 @@
 }
 .ant-layout-sider-trigger {
   background-color: #1677ff !important; 
-  border-right: 2px solid #1677ff;
+  border-right: 2px solid rgb(0, 91, 154);
 }
 
 /* Header */
@@ -65,7 +65,7 @@
   white-space: nowrap !important; /* Không cho phép xuống dòng */
   animation: scroll-text 10s linear infinite !important; /* Hiệu ứng cuộn liên tục trong 10 giây */
   font-size: 20px;
-  color: #1677ff; /* Bạn có thể điều chỉnh màu chữ theo ý muốn */
+  color: rgb(0, 91, 154); /* Bạn có thể điều chỉnh màu chữ theo ý muốn */
   border-radius: 10px;
   padding-left: 1%;
   padding-right: 1%;

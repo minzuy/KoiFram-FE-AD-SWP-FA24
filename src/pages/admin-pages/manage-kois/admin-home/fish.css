@@ -20,6 +20,10 @@
   background-color: darkgreen; /* Màu khi hover */
 }
 /* Xóa màu phông nền của form */
+.ant-modal-title {
+  background-color: #FAFBFB !important;
+  color: royalblue !important;
+}
 .ant-modal-content {
   background-color: #FAFBFB !important;
 }

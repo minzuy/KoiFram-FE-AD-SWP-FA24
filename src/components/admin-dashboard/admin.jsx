@@ -9,10 +9,19 @@ import {
   LogoutOutlined,
   ReconciliationTwoTone,
   IdcardOutlined,
+  MessageOutlined,
+  CommentOutlined,
 } from "@ant-design/icons";
+
 import { Layout, Menu, theme, Button, Space } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./admin.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFish,
+  faStar,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -27,17 +36,17 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("Users", "user", <IdcardOutlined />),
-  getItem(
-    "Fish",
-    "fish",
-    <ShoppingCartOutlined />
-    //   [
-    //   getItem("Item1", "3"),
-    //   getItem("Item2", "4"),
-    //   getItem("Item3", "5"),
-    // ]
-  ),
+  getItem("Business", "fish", <FontAwesomeIcon icon={faStar} />, [
+    getItem(
+      "Shop Home Page",
+      "fish2",
+      <FontAwesomeIcon icon={faCartShopping} />
+    ),
+    getItem("Fish list", "fish", <FontAwesomeIcon icon={faFish} />),
+  ]),
+
   getItem("Order", "order", <ReconciliationTwoTone />),
+  getItem("User feedback", "feedback", <CommentOutlined />),
   getItem("Account", "account", <UserOutlined />),
 ];
 
@@ -123,6 +132,7 @@ const AdminHomePage = () => {
               type="primary"
               icon={<LogoutOutlined />}
               onClick={handleLogout}
+              style={{ fontWeight: "bold" }}
             >
               LOGOUT
             </Button>
@@ -143,7 +153,6 @@ const AdminHomePage = () => {
                   Welcome {username} to the Admin Panel ! Click on the left side
                   of the Sidebar to continue your business !
                 </p>
-                <br></br>
                 <br></br>
                 <p>
                   Xin chào {username} ! Hãy nhấp vào thanh bên trái để tiếp tục

@@ -10,11 +10,12 @@ import {
   Table,
   Upload,
 } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import uploadFile from "../../../utils/file";
+import uploadFile from "../../../../utils/file";
 import "./fish.css";
 
 function FishManagementPage() {
@@ -23,6 +24,7 @@ function FishManagementPage() {
       title: "ID",
       dataIndex: "id",
       key: "id",
+      align: "center",
     },
     {
       title: "Name",
@@ -70,7 +72,7 @@ function FishManagementPage() {
       filterMode: "tree",
       filterSearch: true,
       onFilter: (value, record) => record.name.includes(value),
-      width: "17%",
+      width: "10%",
     },
     {
       title: "Image",
@@ -96,24 +98,27 @@ function FishManagementPage() {
       ],
       onFilter: (value, record) => record.name.startsWith(value),
       filterSearch: true,
-      width: "20%",
+      width: "10%",
     },
     {
-      title: "Age",
+      title: "Age (months)",
       dataIndex: "age",
       key: "age",
       sorter: (a, b) => a.age - b.age,
+      width: "10%",
     },
     {
-      title: "Weight",
+      title: "Weight (gram)",
       dataIndex: "weight",
       key: "weight",
       sorter: (a, b) => a.weight - b.weight,
+      width: "10%",
     },
     {
       title: "Action",
       dataIndex: "id",
       key: "id",
+      align: "center",
       render: (id, category) => {
         return (
           <div className="action-buttons">
@@ -262,10 +267,13 @@ function FishManagementPage() {
           formVariable.resetFields(); // Reset form khi nhấn "ADD"
           handleOpenModal(true);
         }}
+        style={{ fontWeight: "bold" }}
       >
         ADD
+        <PlusCircleOutlined />
       </Button>
 
+      <br></br>
       <br></br>
 
       <Table dataSource={fishes} columns={columns} bordered />
