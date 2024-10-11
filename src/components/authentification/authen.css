@@ -12,7 +12,7 @@
 .background-video {
     position: absolute;
     left: 0;
-    width: 50vw; /* Chiếm 50% chiều rộng màn hình */
+    width: 100%; /* Chiếm 50% chiều rộng màn hình */
     height: 94vh;
 }
 

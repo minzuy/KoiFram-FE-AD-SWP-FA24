@@ -27,6 +27,7 @@ function UserManagementPage() {
       dataIndex: "Username",
       key: "Username",
       width: "10%",
+      align: "center",
     },
     {
       title: "Account",
@@ -70,11 +71,14 @@ function UserManagementPage() {
       title: "Phone",
       dataIndex: "Phone",
       key: "Phone",
+      align: "center",
     },
     {
       title: "Edit",
       dataIndex: "Id",
       key: "Id",
+      align: "center",
+
       render: (user) => {
         return (
           <div className="action-buttons">
@@ -95,6 +99,8 @@ function UserManagementPage() {
       title: "Disabled",
       dataIndex: "Id",
       key: "Id",
+      align: "center",
+
       render: (Id) => {
         return (
           <Popconfirm

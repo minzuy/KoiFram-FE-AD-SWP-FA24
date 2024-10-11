@@ -13,15 +13,20 @@ import {
   CommentOutlined,
 } from "@ant-design/icons";
 
-import { Layout, Menu, theme, Button, Space } from "antd";
+import { Layout, Menu, theme, Button, Space, Badge } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faTruck,
   faFish,
   faStar,
   faCartShopping,
+  faPhone,
+  faShop,
+  faCommentDollar,
 } from "@fortawesome/free-solid-svg-icons";
+import Typography from "antd/es/typography/Typography";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -36,16 +41,48 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("Users", "user", <IdcardOutlined />),
-  getItem("Business", "fish", <FontAwesomeIcon icon={faStar} />, [
-    getItem(
-      "Shop Home Page",
-      "fish2",
-      <FontAwesomeIcon icon={faCartShopping} />
-    ),
-    getItem("Fish list", "fish", <FontAwesomeIcon icon={faFish} />),
-  ]),
+  getItem(
+    "Business",
+    "fish",
+    <FontAwesomeIcon icon={faStar} style={{ color: "#007BFF" }} />,
+    [
+      getItem(
+        "Home Page",
+        "fish2",
+        <FontAwesomeIcon icon={faShop} style={{ color: "#007BFF" }} />
+      ),
+      getItem(
+        "Fish list",
+        "fish",
+        <FontAwesomeIcon icon={faFish} style={{ color: "#007BFF" }} />
+      ),
+    ]
+  ),
 
-  getItem("Order", "order", <ReconciliationTwoTone />),
+  getItem(
+    "Order",
+    "order",
+    <Badge
+      count={20}
+      style={{
+        backgroundColor: "#52c41a", // Màu nền của Badge
+        fontSize: "10px", // Kích thước chữ của số đếm
+        height: "11px", // Chiều cao của Badge
+        minWidth: "12px", // Chiều rộng tối thiểu của Badge
+        lineHeight: "11px", // Dòng chảy của Badge để căn giữa số
+      }}
+    >
+      <FontAwesomeIcon icon={faCommentDollar} style={{ color: "#007BFF" }} />
+    </Badge>,
+    [
+      getItem("Order", "order", <ReconciliationTwoTone />),
+      getItem(
+        "Account",
+        "account",
+        <FontAwesomeIcon icon={faTruck} style={{ color: "#007BFF" }} />
+      ),
+    ]
+  ),
   getItem("User feedback", "feedback", <CommentOutlined />),
   getItem("Account", "account", <UserOutlined />),
 ];
@@ -164,15 +201,47 @@ const AdminHomePage = () => {
           </div>
         </Content>
 
-        <Footer
-          style={{
-            textAlign: "center",
-            backgroundColor: "#005B9A",
-            fontWeight: "bold",
-            color: "#FAFBFB",
-          }}
-        >
-          @FPTU HCM
+        <Footer className="custom-footer">
+          <div>
+            <Typography.Link href="tel: +038271284" className="custom-link">
+              <span
+                className="hover-text"
+                style={{ color: "#FAFBFB", fontWeight: "normal" }}
+              >
+                <FontAwesomeIcon icon={faPhone} />
+                +8438271284 ❤
+              </span>
+            </Typography.Link>
+          </div>
+          <div>
+            <Typography.Link
+              href="https://www.google.com"
+              style={{ color: "#FAFBFB" }}
+            >
+              <span
+                className="hover-text"
+                style={{
+                  color: "#FAFBFB",
+                  fontWeight: "normal",
+                }}
+              >
+                Terms of Use
+              </span>
+            </Typography.Link>
+          </div>
+          <div>
+            <Typography.Link
+              href="https://fpt.edu.vn"
+              style={{ color: "#FAFBFB" }}
+            >
+              <span
+                className="hover-text"
+                style={{ color: "#FAFBFB", fontWeight: "normal" }}
+              >
+                © 2024 FPTU HCM
+              </span>
+            </Typography.Link>
+          </div>
         </Footer>
       </Layout>
     </Layout>

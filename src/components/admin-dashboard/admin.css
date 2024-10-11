@@ -1,7 +1,7 @@
 .admin-header {
   display: flex;
   align-items: center;
-  background-color: #005B9A;
+  background-color: #08416a;
   padding: 10px 20px;
   border-bottom: 1px solid #1677ff;
   gap: 5px; /* Thêm khoảng cách giữa các thành phần */
@@ -18,7 +18,7 @@
 
 .admin-header .anticon {
   margin-right: 12px;
-  border: 2px solid rgb(0, 91, 154);
+  border: 2px solid cornflowerblue ; 
   border-radius: 50%;
   padding: 5px;
   background-color: #FAFBFB;
@@ -30,20 +30,16 @@
 }
 .ant-layout-sider-trigger {
   background-color: #1677ff !important; 
-  border-right: 2px solid rgb(0, 91, 154);
+  border-right: 2px solid rgb(22, 119, 255) ;
 }
 
 /* Header */
 .ant-layout-header {
   background-color: #1d3a5f; /* Màu xanh đậm hơn */
-  border-bottom: 2px solid #1677ff; /* Đường viền phía dưới */
+  border-bottom: 2px solid cornflowerblue ; /* Đường viền phía dưới */
 }
 
-/* Footer */
-.ant-layout-footer {
-  background-color: #1677ff; /* Màu tương tự như header */
-  color: #FAFBFB; /* Màu chữ trắng */
-}
+
 @keyframes scroll-text {
   0% {
     transform: translateX(100%); /* Bắt đầu từ ngoài khung bên phải */
@@ -71,4 +67,33 @@
   padding-right: 1%;
   font-weight: bold;
   width: 100%; /* Điều chỉnh để chiếm hết chiều ngang admin-content */
+}
+.custom-footer {
+  background-color: #195b89 !important; /* Xanh đậm hơn để tạo sự tương phản */
+  color: #FAFBFB; /* Màu chữ trắng để nổi bật trên nền xanh */
+  text-align: center; /* Căn giữa nội dung */
+  padding: 30px; /* Khoảng cách giữa nội dung và mép */
+  font-family: 'Poppins', sans-serif; /* Font chữ tinh tế */
+  font-size: 14px; /* Kích thước chữ nhỏ gọn */
+  display: flex; /* Sử dụng Flexbox */
+  justify-content: space-evenly; /* Chia đều nội dung */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  flex-wrap: wrap; /* Giúp nội dung xuống dòng trên màn hình nhỏ */
+  border-top: 2px solid cornflowerblue ; /* Đường viền phía trên tạo sự phân cách */
+}
+
+.custom-footer div {
+  flex: 1; /* Mỗi khối nội dung chiếm 1 phần đều nhau */
+  text-align: center; /* Căn giữa văn bản trong mỗi div */
+}
+
+.custom-footer a {
+  color: #FAFBFB; /* Màu liên kết là màu trắng */
+  text-decoration: none; /* Xóa gạch chân liên kết */
+  margin: 0 10px; /* Khoảng cách giữa các liên kết */
+  transition: color 0.3s ease; /* Hiệu ứng hover mượt */
+}
+
+.hover-text:hover {
+  color: cornflowerblue !important; /* Màu chuyển sang vàng khi hover */
 }

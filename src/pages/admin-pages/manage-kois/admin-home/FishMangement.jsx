@@ -30,6 +30,7 @@ function FishManagementPage() {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      align: "center",
     },
     {
       title: "Category",
@@ -99,6 +100,7 @@ function FishManagementPage() {
       onFilter: (value, record) => record.name.startsWith(value),
       filterSearch: true,
       width: "10%",
+      align: "center",
     },
     {
       title: "Age (months)",

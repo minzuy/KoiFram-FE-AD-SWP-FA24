@@ -1,0 +1,91 @@
+/* Đặt nền cho toàn trang */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Phần chứa toàn bộ trang */
+  .page-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Tiêu đề chính */
+  .ant-typography {
+    color: #2c3e50 !important;
+    font-weight: bold !important;
+  }
+  
+  /* Card bao quanh tiêu đề */
+  .ant-card {
+    background-color: #f0f2f5 !important;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hiệu ứng hover cho các link */
+  a {
+    color: #3498db;
+    transition: color 0.3s;
+  }
+  
+  a:hover {
+    color: #1abc9c;
+  }
+  
+  /* Bảng */
+  .ant-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header bảng */
+  .ant-table-thead > tr > th {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #dcdcdc;
+  }
+  
+  /* Row hover */
+  .ant-table-tbody > tr:hover > td {
+    background-color: #f7f9fb;
+  }
+  
+  /* Cột hành động */
+  .ant-space-item a {
+    color: #e74c3c;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .ant-space-item a:hover {
+    color: #c0392b;
+  }
+  
+  /* Thẻ trạng thái */
+  .ant-tag {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+  
+  .ant-tag-green {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .ant-tag-volcano {
+    background-color: #e74c3c;
+    color: white;
+  }
+  

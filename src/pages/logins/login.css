@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw; /* Chiều rộng toàn trang */
+  width: 100%; /* Chiều rộng toàn trang */
   height: 100vh; /* Chiều cao toàn trang */
   z-index: -1; /* Đặt video phía sau form */
 }
