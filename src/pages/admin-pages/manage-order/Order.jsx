@@ -55,15 +55,15 @@ const OrderPage = () => {
       key: "date",
       render: (text) => moment(text).format("DD/MM/YYYY"),
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => {
-        let color = status === "Completed" ? "green" : "red";
-        return <Tag color={color}>{status.toUpperCase()}</Tag>;
-      },
-    },
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "status",
+    //   render: (status) => {
+    //     let color = status === "Completed" ? "green" : "red";
+    //     return <Tag color={color}>{status.toUpperCase()}</Tag>;
+    //   },
+    // },
     {
       title: "Total",
       dataIndex: "total",

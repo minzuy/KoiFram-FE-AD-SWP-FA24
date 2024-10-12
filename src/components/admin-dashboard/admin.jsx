@@ -21,10 +21,11 @@ import {
   faTruck,
   faFish,
   faStar,
-  faCartShopping,
   faPhone,
   faShop,
   faCommentDollar,
+  faUsersLine,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Typography from "antd/es/typography/Typography";
 
@@ -40,51 +41,62 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("Users", "user", <IdcardOutlined />),
+  getItem(
+    "Users-serivce",
+    "user",
+    <FontAwesomeIcon icon={faUsersLine} style={{ color: "#08416A" }} />,
+    [
+      getItem("Users", "user", <IdcardOutlined />),
+      getItem("User feedback", "feedback", <CommentOutlined />),
+    ]
+  ),
   getItem(
     "Business",
     "fish",
-    <FontAwesomeIcon icon={faStar} style={{ color: "#007BFF" }} />,
+    <FontAwesomeIcon icon={faStar} style={{ color: "#08416A" }} />,
     [
       getItem(
         "Home Page",
         "fish2",
-        <FontAwesomeIcon icon={faShop} style={{ color: "#007BFF" }} />
+        <FontAwesomeIcon icon={faShop} style={{ color: "#195B89 " }} />
       ),
       getItem(
         "Fish list",
         "fish",
-        <FontAwesomeIcon icon={faFish} style={{ color: "#007BFF" }} />
+        <FontAwesomeIcon icon={faFish} style={{ color: "#195B89 " }} />
       ),
     ]
   ),
 
   getItem(
-    "Order",
+    "Order-details",
     "order",
     <Badge
       count={20}
       style={{
         backgroundColor: "#52c41a", // Màu nền của Badge
-        fontSize: "10px", // Kích thước chữ của số đếm
+        fontSize: "9px", // Kích thước chữ của số đếm
         height: "11px", // Chiều cao của Badge
         minWidth: "12px", // Chiều rộng tối thiểu của Badge
         lineHeight: "11px", // Dòng chảy của Badge để căn giữa số
       }}
     >
-      <FontAwesomeIcon icon={faCommentDollar} style={{ color: "#007BFF" }} />
+      <FontAwesomeIcon icon={faCommentDollar} style={{ color: "#08416A" }} />
     </Badge>,
     [
       getItem("Order", "order", <ReconciliationTwoTone />),
       getItem(
         "Account",
         "account",
-        <FontAwesomeIcon icon={faTruck} style={{ color: "#007BFF" }} />
+        <FontAwesomeIcon icon={faTruck} style={{ color: "#195B89" }} />
       ),
     ]
   ),
-  getItem("User feedback", "feedback", <CommentOutlined />),
-  getItem("Account", "account", <UserOutlined />),
+  getItem(
+    "Account",
+    "account",
+    <FontAwesomeIcon icon={faUser} style={{ color: "#08416A" }} />
+  ),
 ];
 
 const AdminHomePage = () => {

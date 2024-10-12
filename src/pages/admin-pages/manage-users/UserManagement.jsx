@@ -16,69 +16,56 @@ import "./user.css";
 
 function UserManagementPage() {
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "Id",
-      key: "Id",
-      width: "5%",
-    },
+    // {
+    //   title: "ID",
+    //   dataIndex: "id",
+    //   key: "id",
+    //   width: "5%",
+    // },
     {
       title: "Username",
-      dataIndex: "Username",
-      key: "Username",
+      dataIndex: "username",
+      key: "username",
       width: "10%",
       align: "center",
     },
     {
-      title: "Account",
-      dataIndex: "userId",
-      key: "userId",
-    },
-    {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-    },
-    {
-      title: "Username",
-      dataIndex: "Name",
-      key: "Name",
-    },
-    {
-      title: "Point",
-      dataIndex: "Point",
-      key: "Point",
-      sorter: (a, b) => a.Point - b.Point, // Thay đổi từ bonusScore thành point
-      width: "7%",
-    },
-    {
-      title: "Address",
-      dataIndex: "Address",
-      key: "Address",
-    },
-    {
-      title: "Created At",
-      dataIndex: "CreateAt",
-      key: "CreateAt",
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-      width: "7%",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Phone",
-      dataIndex: "Phone",
-      key: "Phone",
+      dataIndex: "phone",
+      key: "phone",
       align: "center",
     },
     {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      width: "7%",
+    },
+    {
+      title: "Role",
+      dataIndex: "role.name",
+      key: "role.name",
+    },
+    {
+      title: "Created At",
+      dataIndex: "createAt",
+      key: "createAt",
+    },
+    {
       title: "Edit",
-      dataIndex: "Id",
-      key: "Id",
+      dataIndex: "id",
+      key: "id",
       align: "center",
-
       render: (user) => {
         return (
           <div className="action-buttons">
@@ -96,11 +83,10 @@ function UserManagementPage() {
       },
     },
     {
-      title: "Disabled",
-      dataIndex: "Id",
-      key: "Id",
+      title: "Disable",
+      dataIndex: "id",
+      key: "id",
       align: "center",
-
       render: (Id) => {
         return (
           <Popconfirm
@@ -134,7 +120,7 @@ function UserManagementPage() {
     formVariable.submit();
   };
 
-  const api = "https://66f510f49aa4891f2a23b862.mockapi.io/UserManagement";
+  const api = "http://api-koifish.evericks.com/api/users";
 
   const fetchUsers = async () => {
     try {
@@ -153,9 +139,9 @@ function UserManagementPage() {
     try {
       setSubmitting(true);
       if (user.id) {
-        const response = await axios.put(`${api}/${user.id}`, user); // Correct API call
+        await axios.put(`${api}/${user.id}`, user); // Cập nhật người dùng
       } else {
-        const response = await axios.post(api, user);
+        await axios.post(api, user); // Thêm người dùng mới
       }
       fetchUsers();
       formVariable.resetFields();
@@ -186,8 +172,8 @@ function UserManagementPage() {
         columns={columns}
         bordered
         className="custom-table-border"
-        pagination={{ pageSize: 10 }} // Hiển thị 10 item mỗi trang
-        scroll={{ y: 1000 }} // Tạo thanh cuộn dọc khi bảng có nhiều dữ liệu
+        pagination={{ pageSize: 10 }}
+        scroll={{ y: 1000 }}
       />
 
       <Modal
@@ -199,103 +185,61 @@ function UserManagementPage() {
       >
         <Form form={formVariable} onFinish={handleSubmitValue}>
           <Form.Item
-            name={"Username"}
+            name={"username"}
             label={"Username"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền tên vào",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền tên vào" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={"userId"}
+            name={"id"}
             label={"User ID"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền ID vào",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền ID vào" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={"Name"}
+            name={"name"}
             label={"Name"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền tên vào",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền tên vào" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name={"password"}
             label={"Password"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền mật khẩu vào",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền mật khẩu vào" }]}
           >
             <Input.Password />
           </Form.Item>
           <Form.Item
-            name={"Point"}
+            name={"point"} // Chuyển đổi thành `point` nếu bạn có dữ liệu này
             label={"Point"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền điểm vào",
-              },
-              {
-                type: "number",
-                min: 0,
-                max: 100,
-                message: "Điểm không hợp lệ",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền điểm vào" }]}
           >
             <InputNumber />
           </Form.Item>
           <Form.Item
-            name={"Address"}
+            name={"address"}
             label={"Address"}
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng điền địa chỉ vào",
-              },
-            ]}
+            rules={[{ required: true, message: "Vui lòng điền địa chỉ vào" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={"Status"}
+            name={"status"}
             label={"Status"}
             rules={[
-              {
-                required: true,
-                message: "Vui lòng điền trạng thái vào",
-              },
+              { required: true, message: "Vui lòng điền trạng thái vào" },
             ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={"Phone"}
+            name={"phone"}
             label={"Phone"}
             rules={[
-              {
-                required: true,
-                message: "Vui lòng điền số điện thoại vào",
-              },
+              { required: true, message: "Vui lòng điền số điện thoại vào" },
             ]}
           >
             <Input />

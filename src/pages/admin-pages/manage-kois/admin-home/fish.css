@@ -1,33 +1,100 @@
-/* Style cho nút ADD */
+.container {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ant-table-cell {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ant-table-cell-description {
+  max-width: 250px;
+}
+
+.ant-table-cell-origin,
+.ant-table-cell-categories {
+  max-width: 150px;
+}
+
+.ant-modal-title {
+  background-color: #f0f2f5 !important;
+  color: #1f2937 !important;
+  font-weight: bold;
+}
+
+.ant-modal-content {
+  padding: 20px !important;
+  background-color: #ffffff !important;
+}
+
+.ant-form-item {
+  margin-bottom: 16px !important;
+}
+
+.ant-modal-footer {
+  text-align: right;
+  padding: 10px 16px !important;
+}
+
+/* Nút ADD */
 .add-button {
-  background-color: rgb(22, 119, 255) !important; /* Màu cho nút ADD */
-  color: #ffffff; /* Màu chữ */
-  border: none; /* Không có viền */
+  background-color: #1890ff !important;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: rgb(17, 93, 204); /* Màu khi hover */
+  background-color: #40a9ff !important;
 }
 
-/* Style cho nút EDIT */
+/* Nút EDIT */
 .edit-button {
-  background-color: seagreen !important; /* Màu cho nút EDIT */
-  color: #ffffff; /* Màu chữ */
-  border: none; /* Không có viền */
+  background-color: #52c41a !important;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
 .edit-button:hover {
-  background-color: darkgreen; /* Màu khi hover */
-}
-/* Xóa màu phông nền của form */
-.ant-modal-title {
-  background-color: #FAFBFB !important;
-  color: royalblue !important;
-}
-.ant-modal-content {
-  background-color: #FAFBFB !important;
+  background-color: #73d13d !important;
 }
 
-.ant-modal-body {
-  background-color: #FAFBFB !important; /* Màu nền trong suốt */
+/* Nút Delete */
+.delete-button {
+  background-color: #ff4d4f !important;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.delete-button:hover {
+  background-color: #ff7875 !important;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+/* Điều chỉnh kích thước ảnh trong bảng */
+.ant-image {
+  max-width: 100px;
+  height: auto;
+}
+
+.ant-table-cell-thumbnailUrl img {
+  object-fit: cover;
+  border-radius: 5px;
 }
