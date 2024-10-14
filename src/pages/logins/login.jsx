@@ -11,35 +11,34 @@ import "./login.css"; // Import file CSS
 function LoginPage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
-  const api = "https://localhost:7182/Manager";
+  const api = "http://api-koifish.evericks.com/api/auth/sign-in";
   const dispatch = useDispatch();
 
   const handleLogin = async (values) => {
     setSubmitting(true);
     try {
-      // Gửi yêu cầu POST với userId và password
+      // Gửi yêu cầu POST với các thông tin cần thiết
       const response = await axios.post(api, {
-        userID: values.userId,
+        username: values.username,
         password: values.password,
+        name: values.name, // thêm tên từ form
+        phone: values.phone, // thêm số điện thoại từ form
+        address: values.address, // thêm địa chỉ từ form
+        role: "3fa85f64-5717-4562-b3fc-2c963f66afa6", // roleId là cố định
       });
 
-      const { userID, roleId, token } = response.data;
+      const { name, roleId, token } = response.data;
 
       // Lưu thông tin đăng nhập vào localStorage
       localStorage.setItem("token", token);
-      localStorage.setItem("userID", userID); // Lưu userID
+      localStorage.setItem("userName", name); // Lưu name
       localStorage.setItem("roleId", roleId); // Lưu roleId
 
-      // Điều hướng dựa trên roleId
-      if (roleId === "ADMIN" || roleId === "MANAGER") {
-        navigate("/admin");
-      } else {
-        navigate("/admin");
-      }
+      navigate("/admin");
 
       toast.success("Login Successful!");
     } catch (error) {
-      toast.error("Invalid user ID or password");
+      toast.error("Invalid username or password");
       console.log(error);
     } finally {
       setSubmitting(false);
@@ -61,10 +60,11 @@ function LoginPage() {
             }}
             confirmLoading={submitting}
             onFinish={handleLogin}
+            style={{ borderRadius: "10px" }}
           >
             <Form.Item
-              label={<span style={{ color: "rgb(4, 57, 131)" }}>UserID</span>}
-              name="userId"
+              label={<span style={{ color: "rgb(4, 57, 131)" }}>UserName</span>}
+              name="username"
               rules={[
                 {
                   required: true,
@@ -77,6 +77,7 @@ function LoginPage() {
                   ),
                 },
               ]}
+              style={{ margin: "0px 10px" }}
             >
               <Input
                 prefix={<UserOutlined />}
@@ -102,6 +103,7 @@ function LoginPage() {
                   ),
                 },
               ]}
+              style={{ margin: "0px 10px" }}
             >
               <Input.Password
                 prefix={<LockOutlined />}

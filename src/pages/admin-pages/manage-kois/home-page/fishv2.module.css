@@ -1,0 +1,68 @@
+/* fishv2.module.css */
+
+.container {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.title {
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.productCard {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productImage {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.productDetails {
+  padding: 10px;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.productDescription {
+  font-size: 14px;
+  color: #666;
+}
+
+.productOrigin,
+.productSize,
+.productPrice,
+.productPromotionPrice,
+.productStatus {
+  margin: 5px 0;
+}
+
+.productCategories {
+  margin-top: 10px;
+}
+
+.productCategory {
+  display: inline-block;
+  background-color: #08416a;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  font-size: 12px;
+}

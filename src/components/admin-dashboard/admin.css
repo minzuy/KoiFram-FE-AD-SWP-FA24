@@ -40,14 +40,7 @@
 }
 
 
-@keyframes scroll-text {
-  0% {
-    transform: translateX(100%); /* Bắt đầu từ ngoài khung bên phải */
-  }
-  100% {
-    transform: translateX(-100%); /* Chạy ra khỏi khung bên trái */
-  }
-}
+
 
 .admin-content {
   overflow: hidden !important; /* Giới hạn nội dung trong khung chứa */
@@ -56,18 +49,7 @@
   width: 100%; /* Đảm bảo nội dung chiếm hết chiều ngang */
 }
 
-.admin-content p {
-  display: inline-block !important;
-  white-space: nowrap !important; /* Không cho phép xuống dòng */
-  animation: scroll-text 10s linear infinite !important; /* Hiệu ứng cuộn liên tục trong 10 giây */
-  font-size: 20px;
-  color: rgb(0, 91, 154); /* Bạn có thể điều chỉnh màu chữ theo ý muốn */
-  border-radius: 10px;
-  padding-left: 1%;
-  padding-right: 1%;
-  font-weight: bold;
-  width: 100%; /* Điều chỉnh để chiếm hết chiều ngang admin-content */
-}
+
 .custom-footer {
   background-color: #195b89 !important; /* Xanh đậm hơn để tạo sự tương phản */
   color: #FAFBFB; /* Màu chữ trắng để nổi bật trên nền xanh */
@@ -96,4 +78,7 @@
 
 .hover-text:hover {
   color: cornflowerblue !important; /* Màu chuyển sang vàng khi hover */
+}
+.content-paragraph p {
+  color: #195b89;
 }

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import styles from "./fishv2.module.css";
 function FishManagementV2() {
   const [products, setProducts] = useState([]);
-  const api = "https://66f7bc23b5d85f31a34378b6.mockapi.io/FishManagement";
+  const api = "http://api-koifish.evericks.com/api/fish";
 
   const fetchProducts = async () => {
     try {
@@ -28,30 +28,52 @@ function FishManagementV2() {
     });
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <div className="product-list">
+    <div className={styles.container}>
+      <h1 className={styles.title}>Product List</h1>
+      <div className={styles.productList}>
         {products.map((product) => (
-          // Pass product as a prop to the Product component
           <Product key={product.id} product={product} />
         ))}
       </div>
-      <h3>Trang sẽ dùng để MANAGER có thể coi trang bán hàng</h3>
     </div>
   );
 }
-
 const Product = ({ product }) => {
   return (
-    <div className="product">
-      <img src={product.image} alt={product.name} />
-      {/* <h2>{product.name}</h2>
-      <p>{product.category}</p>
-      <p>{product.type}</p>
-      <p>{product.description}</p> */}
-      {/* <p className="price">{product.price} VND</p> */}
+    <div className={styles.productCard}>
+      <img
+        src={product.thumbnailUrl}
+        alt={product.name}
+        className={styles.productImage}
+      />
+      <div className={styles.productDetails}>
+        <h2 className={styles.productName}>{product.name}</h2>
+        <p className={styles.productDescription}>{product.description}</p>
+        <p className={styles.productOrigin}>
+          <strong>Origin:</strong> {product.origin}
+        </p>
+        <p className={styles.productSize}>
+          <strong>Size:</strong> {product.size} cm
+        </p>
+        <p className={styles.productPrice}>
+          <strong>Price:</strong> {product.price} VND
+        </p>
+        <p className={styles.productPromotionPrice}>
+          <strong>Promotion Price:</strong> {product.promotionPrice} VND
+        </p>
+        <p className={styles.productStatus}>
+          <strong>Status:</strong> {product.status}
+        </p>
+        <div className={styles.productCategories}>
+          <strong>Categories:</strong>
+          {product.fishCategories.map((category) => (
+            <span key={category.id} className={styles.productCategory}>
+              {category.category.name}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
-
 export default FishManagementV2;

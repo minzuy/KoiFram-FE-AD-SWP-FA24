@@ -22,7 +22,6 @@
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
   padding: 40px;
-  border-radius: 17px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
   z-index: 1; /* Form nổi trên video */
   width: 400px;
@@ -36,8 +35,9 @@
 }
 
 .login-form button {
-  width: 100%;
+  width: 30%;
   background-color: rgb(22, 119, 255) !important;
+  margin-bottom: 5px;
 }
 .ant-input {
   background-color: white !important;

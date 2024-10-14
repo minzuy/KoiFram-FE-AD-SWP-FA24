@@ -96,11 +96,13 @@ const AccountPage = () => {
         layout="vertical"
         initialValues={userData}
         onFinish={handleFormSubmit}
+        style={{ borderRadius: "5px" }}
       >
         <Form.Item
           label="ID"
           name="id"
           rules={[{ required: true, message: "Please input your ID!" }]}
+          style={{ margin: "0px 10px" }}
         >
           <Input
             prefix={<IdcardOutlined />}
@@ -113,6 +115,7 @@ const AccountPage = () => {
           label="User ID"
           name="userID"
           rules={[{ required: true, message: "Please input your User ID!" }]}
+          style={{ margin: "0px 10px" }}
         >
           <Input
             prefix={<UserOutlined />}
@@ -125,6 +128,7 @@ const AccountPage = () => {
           label="Username"
           name="userName"
           rules={[{ required: true, message: "Please input your username!" }]}
+          style={{ margin: "0px 10px" }}
         >
           <Input
             prefix={<UserOutlined />}
@@ -137,6 +141,7 @@ const AccountPage = () => {
           label="Password"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
+          style={{ margin: "0px 10px" }}
         >
           <Input.Password
             prefix={<LockOutlined />}
@@ -146,7 +151,13 @@ const AccountPage = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={submitting} block>
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={submitting}
+            block
+            style={{ margin: "5px 0" }}
+          >
             Save Changes
           </Button>
         </Form.Item>

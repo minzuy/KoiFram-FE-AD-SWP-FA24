@@ -42,12 +42,12 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(
-    "Users-serivce",
+    "Customer",
     "user",
     <FontAwesomeIcon icon={faUsersLine} style={{ color: "#08416A" }} />,
     [
-      getItem("Users", "user", <IdcardOutlined />),
-      getItem("User feedback", "feedback", <CommentOutlined />),
+      getItem("Customer", "user", <IdcardOutlined />),
+      getItem("Feedback", "feedback", <CommentOutlined />),
     ]
   ),
   getItem(
@@ -86,8 +86,8 @@ const items = [
     [
       getItem("Order", "order", <ReconciliationTwoTone />),
       getItem(
-        "Account",
-        "account",
+        "Delivery",
+        "delivery",
         <FontAwesomeIcon icon={faTruck} style={{ color: "#195B89" }} />
       ),
     ]
@@ -197,7 +197,7 @@ const AdminHomePage = () => {
             }}
           >
             {isContentVisible && (
-              <div className="content-paragraph">
+              <div className="content-paragraph ">
                 <p>
                   Welcome {username} to the Admin Panel ! Click on the left side
                   of the Sidebar to continue your business !

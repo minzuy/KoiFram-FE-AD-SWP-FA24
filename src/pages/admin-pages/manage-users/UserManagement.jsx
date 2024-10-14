@@ -33,17 +33,22 @@ function UserManagementPage() {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      align: "center",
+      width: "10%",
     },
     {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
       align: "center",
+      width: "10%",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
+      align: "center",
+      width: "17%",
     },
     {
       title: "Status",
@@ -53,19 +58,26 @@ function UserManagementPage() {
     },
     {
       title: "Role",
-      dataIndex: "role.name",
-      key: "role.name",
+      dataIndex: "role", // Đặt thành role để lấy toàn bộ object
+      key: "role",
+      render: (role) => role?.name || "N/A", // Truy cập trực tiếp vào role.name
+      width: "7%",
     },
+
     {
       title: "Created At",
       dataIndex: "createAt",
       key: "createAt",
+      align: "center",
+      width: "14%",
     },
     {
       title: "Edit",
       dataIndex: "id",
       key: "id",
       align: "center",
+      width: "7%",
+
       render: (user) => {
         return (
           <div className="action-buttons">
@@ -87,6 +99,8 @@ function UserManagementPage() {
       dataIndex: "id",
       key: "id",
       align: "center",
+      width: "7%",
+
       render: (Id) => {
         return (
           <Popconfirm
@@ -120,7 +134,7 @@ function UserManagementPage() {
     formVariable.submit();
   };
 
-  const api = "http://api-koifish.evericks.com/api/users";
+  const api = "http://api-koifish.evericks.com/api/users/customers";
 
   const fetchUsers = async () => {
     try {

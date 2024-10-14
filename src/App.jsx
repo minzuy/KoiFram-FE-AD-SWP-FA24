@@ -7,6 +7,7 @@ import AccountPage from "./pages/admin-pages/manage-account/account";
 import FishManagementV2 from "./pages/admin-pages/manage-kois/home-page/FishV2";
 import ViewFeedbackPage from "./pages/admin-pages/manage-feedback/Feedback";
 import FishManagementPage from "./pages/admin-pages/manage-kois/admin-home/FishMangement";
+import DeliverCompany from "./pages/admin-pages/deliver-company/deliver";
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +46,10 @@ function App() {
         {
           path: "account",
           element: <AccountPage />,
+        },
+        {
+          path: "delivery",
+          element: <DeliverCompany />,
         },
       ],
     },

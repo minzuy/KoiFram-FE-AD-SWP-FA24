@@ -14,7 +14,7 @@ import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import uploadFile from "../../../../utils/file";
+import uploadFile from "../../../../utils/file"; // Đảm bảo đường dẫn đúng
 import "./fish.css";
 
 function FishManagementPage() {
@@ -68,14 +68,18 @@ function FishManagementPage() {
   };
 
   const handleSubmitValue = async (fish) => {
-    if (fileList.length > 0) {
-      const file = fileList[0].originFileObj;
-      const imageUrl = await uploadFile(file);
-      fish.image = imageUrl;
-    }
-
     try {
       setSubmitting(true);
+
+      // Upload hình ảnh nếu có
+      if (fileList.length > 0) {
+        const file = fileList[0].originFileObj;
+        const imageUrl = await uploadFile(file);
+        fish.thumbnailUrl = imageUrl; // Sử dụng thumbnailUrl để lưu đường dẫn hình ảnh
+      }
+
+      // Lấy token từ localStorage hoặc nơi bạn lưu trữ
+      const yourToken = localStorage.getItem("token");
 
       const headers = {
         Authorization: `Bearer ${yourToken}`, // Thay yourToken bằng token thật của bạn
@@ -92,6 +96,7 @@ function FishManagementPage() {
 
       fetchFishes();
       formVariable.resetFields();
+      setFileList([]); // Reset danh sách file sau khi submit
       handleHideModal();
     } catch (error) {
       console.error("Error:", error);
@@ -110,6 +115,14 @@ function FishManagementPage() {
 
   const handleRowClick = (record) => {
     setSelectedFish(record); // Chọn dòng được nhấp
+    setFileList([
+      {
+        uid: "-1",
+        name: "image.png",
+        status: "done",
+        url: record.thumbnailUrl,
+      },
+    ]); // Hiển thị hình ảnh hiện tại trong Upload component
   };
 
   const getBase64 = (file) =>
@@ -131,21 +144,10 @@ function FishManagementPage() {
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
   const uploadButton = (
-    <button
-      style={{
-        border: 0,
-        background: "none",
-      }}
-      type="button"
-    >
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </button>
+    <div>
+      <PlusCircleOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
   );
 
   const columns = [
@@ -225,12 +227,12 @@ function FishManagementPage() {
         onClick={() => {
           formVariable.resetFields(); // Reset form khi nhấn "ADD"
           setSelectedFish(null); // Đảm bảo selectedFish là null
+          setFileList([]); // Reset danh sách file khi thêm mới
           handleOpenModal();
         }}
         style={{ fontWeight: "bold" }}
       >
-        ADD
-        <PlusCircleOutlined />
+        ADD <PlusCircleOutlined />
       </Button>
 
       <br />
@@ -247,16 +249,20 @@ function FishManagementPage() {
       />
 
       <Modal
-        title="Create New Fish"
+        title={selectedFish ? "Edit Fish" : "Create New Fish"}
         open={visible}
         onCancel={handleHideModal}
         onOk={handleOKButton}
         confirmLoading={submitting}
       >
-        <Form form={formVariable} onFinish={handleSubmitValue}>
+        <Form
+          form={formVariable}
+          onFinish={handleSubmitValue}
+          layout="vertical"
+        >
           <Form.Item
-            name={"name"}
-            label={"Fish Name"}
+            name="name"
+            label="Fish Name"
             rules={[
               {
                 required: true,
@@ -268,8 +274,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"description"}
-            label={"Description"}
+            name="description"
+            label="Description"
             rules={[
               {
                 required: true,
@@ -281,8 +287,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"origin"}
-            label={"Origin"}
+            name="origin"
+            label="Origin"
             rules={[
               {
                 required: true,
@@ -294,8 +300,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"size"}
-            label={"Size (cm)"}
+            name="size"
+            label="Size (cm)"
             rules={[
               {
                 required: true,
@@ -307,8 +313,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"price"}
-            label={"Price"}
+            name="price"
+            label="Price"
             rules={[
               {
                 required: true,
@@ -320,8 +326,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"promotionPrice"}
-            label={"Promotion Price"}
+            name="promotionPrice"
+            label="Promotion Price"
             rules={[
               {
                 required: true,
@@ -333,8 +339,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"dateOfBirth"}
-            label={"Date of Birth"}
+            name="dateOfBirth"
+            label="Date of Birth"
             rules={[
               {
                 required: true,
@@ -346,8 +352,8 @@ function FishManagementPage() {
           </Form.Item>
 
           <Form.Item
-            name={"status"}
-            label={"Status"}
+            name="status"
+            label="Status"
             rules={[
               {
                 required: true,
@@ -357,23 +363,34 @@ function FishManagementPage() {
           >
             <Input />
           </Form.Item>
-          <Form.Item name={"image"} label={"Image"}>
+
+          <Form.Item name="thumbnailUrl" label="Image">
             <Upload
-              action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
               listType="picture-card"
               fileList={fileList}
               onPreview={handlePreview}
               onChange={handleChange}
+              beforeUpload={() => false} // Ngăn chặn upload mặc định
+              maxCount={1} // Giới hạn chỉ upload một hình ảnh
             >
-              {fileList.length >= 8 ? null : uploadButton}
+              {fileList.length >= 1 ? null : uploadButton}
             </Upload>
           </Form.Item>
         </Form>
       </Modal>
 
+      {/* Preview Modal */}
+      <Modal
+        open={previewOpen}
+        footer={null}
+        onCancel={() => setPreviewOpen(false)}
+      >
+        <img alt="Preview" style={{ width: "100%" }} src={previewImage} />
+      </Modal>
+
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>Actions</h3>
+        <h3 style={{ color: "#195b89 " }}>Actions</h3>
         {selectedFish ? (
           <div className="action-buttons">
             <h4>
