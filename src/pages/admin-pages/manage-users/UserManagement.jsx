@@ -78,14 +78,14 @@ function UserManagementPage() {
       align: "center",
       width: "7%",
 
-      render: (user) => {
+      render: (_, record) => {
         return (
           <div className="action-buttons">
             <Button
               type="primary"
               onClick={() => {
                 handleOpenModal(true);
-                formVariable.setFieldsValue(user); // Load dữ liệu user vào form
+                formVariable.setFieldsValue(record); // Load dữ liệu từ hàng vào form
               }}
             >
               EDIT
@@ -94,6 +94,7 @@ function UserManagementPage() {
         );
       },
     },
+
     {
       title: "Disable",
       dataIndex: "id",
@@ -225,13 +226,6 @@ function UserManagementPage() {
             rules={[{ required: true, message: "Vui lòng điền mật khẩu vào" }]}
           >
             <Input.Password />
-          </Form.Item>
-          <Form.Item
-            name={"point"} // Chuyển đổi thành `point` nếu bạn có dữ liệu này
-            label={"Point"}
-            rules={[{ required: true, message: "Vui lòng điền điểm vào" }]}
-          >
-            <InputNumber />
           </Form.Item>
           <Form.Item
             name={"address"}

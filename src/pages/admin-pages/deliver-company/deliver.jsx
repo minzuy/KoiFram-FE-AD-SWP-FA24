@@ -8,7 +8,11 @@ function DeliverCompany() {
   const [loading, setLoading] = useState(false);
   const [editingCompany, setEditingCompany] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCalculateModalVisible, setIsCalculateModalVisible] = useState(false); // Modal tính chi phí vận chuyển
+  const [selectedCompany, setSelectedCompany] = useState(null); // Công ty được chọn để tính toán
   const [form] = Form.useForm(); // Khai báo form từ Ant Design
+  const [km, setKm] = useState(0); // Giá trị km nhập vào
+  const [shippingCost, setShippingCost] = useState(0); // Chi phí vận chuyển
 
   const api = "http://api-koifish.evericks.com/api/delivery-companies";
 
@@ -52,7 +56,7 @@ function DeliverCompany() {
     setIsModalVisible(true);
   };
 
-  const handleOk = async () => {
+  const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
       if (editingCompany) {
@@ -74,6 +78,18 @@ function DeliverCompany() {
 
   const handleCancel = () => {
     setIsModalVisible(false); // Đóng modal
+  };
+
+  const handleCalculateShipping = (company) => {
+    setSelectedCompany(company); // Lưu công ty được chọn
+    setIsCalculateModalVisible(true); // Mở modal tính toán
+  };
+
+  const calculateShippingCost = () => {
+    if (selectedCompany && km) {
+      const cost = km * selectedCompany.price;
+      setShippingCost(cost);
+    }
   };
 
   const columns = [
@@ -109,12 +125,20 @@ function DeliverCompany() {
       render: (text, record) => (
         <div>
           <Button
+            type="default"
+            onClick={() => handleCalculateShipping(record)} // Nút mở modal tính chi phí
+            style={{ marginRight: 8, backgroundColor: "#FAFBFB" }}
+          >
+            Calculate Shipping
+          </Button>
+          <Button
             type="primary"
             onClick={() => handleEdit(record)}
             style={{ marginRight: 8 }}
           >
             Edit
           </Button>
+
           <Popconfirm
             title="Are you sure to delete this company?"
             onConfirm={() => handleDelete(record.id)}
@@ -136,9 +160,6 @@ function DeliverCompany() {
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         Add Company
       </Button>
-      <Button type="primary" onClick={fetchCompanies} loading={loading}>
-        Refresh
-      </Button>
       <br />
       <br />
       <Table
@@ -152,7 +173,7 @@ function DeliverCompany() {
       <Modal
         title={editingCompany ? "Edit Company" : "Add Company"}
         visible={isModalVisible}
-        onOk={handleOk}
+        onOk={handleSubmit}
         onCancel={handleCancel}
       >
         <Form form={form} layout="vertical">
@@ -184,6 +205,34 @@ function DeliverCompany() {
           >
             <Input type="number" />
           </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Modal tính chi phí vận chuyển */}
+      <Modal
+        title="Calculate Shipping Cost"
+        visible={isCalculateModalVisible}
+        onOk={calculateShippingCost}
+        onCancel={() => setIsCalculateModalVisible(false)}
+      >
+        <p>
+          <strong>Company:</strong> {selectedCompany?.name}
+        </p>
+        <Form layout="vertical">
+          <Form.Item label="Distance (Km)">
+            <Input
+              type="number"
+              value={km}
+              onChange={(e) => setKm(e.target.value)}
+              placeholder="Enter distance in kilometers"
+            />
+          </Form.Item>
+          {shippingCost > 0 && (
+            <p>
+              <strong>Shipping Cost:</strong> {shippingCost.toLocaleString()}{" "}
+              VND
+            </p>
+          )}
         </Form>
       </Modal>
     </div>

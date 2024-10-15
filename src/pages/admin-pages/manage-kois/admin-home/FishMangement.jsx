@@ -1,5 +1,6 @@
 import {
   Button,
+  DatePicker,
   Form,
   Image,
   Input,
@@ -16,6 +17,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import uploadFile from "../../../../utils/file"; // Đảm bảo đường dẫn đúng
 import "./fish.css";
+import moment from "moment";
 
 function FishManagementPage() {
   const [formVariable] = useForm();
@@ -30,16 +32,69 @@ function FishManagementPage() {
   // Fetch API
   const api = "http://api-koifish.evericks.com/api/fish";
 
-  useEffect(() => {
-    fetchFishes();
-  }, []);
-
+  // GET
   const fetchFishes = async () => {
     try {
       const response = await axios.get(api);
       setFishes(response.data);
     } catch (error) {
-      console.error("Failed to fetch fishes:", error);
+      toast.error("Failed to fetch fishes:", error);
+      console.error(error.response.data);
+    }
+  };
+  useEffect(() => {
+    fetchFishes();
+  }, []);
+  // CREATE || UPDATE
+  const handleSubmitValue = async (fish) => {
+    try {
+      setSubmitting(true);
+
+      // Upload hình ảnh nếu có
+      if (fileList.length > 0) {
+        const file = fileList[0].originFileObj;
+        const imageUrl = await uploadFile(file);
+        fish.thumbnailUrl = imageUrl; // Sử dụng thumbnailUrl để lưu đường dẫn hình ảnh
+      }
+      // Chuyển đổi dateOfBirth sang định dạng yyyy/mm/dd
+      fish.dateOfBirth = fish.dateOfBirth
+        ? moment(fish.dateOfBirth).format("YYYY/MM/DD")
+        : null;
+
+      // Lấy token từ localStorage hoặc nơi bạn lưu trữ
+      const token = localStorage.getItem("token");
+
+      const headers = {
+        Authorization: `Bearer ${token}`, // Thay yourToken bằng token thật của bạn
+        // Bạn có thể thêm các headers khác nếu cần
+      };
+
+      if (selectedFish) {
+        await axios.put(`${api}/${selectedFish.id}`, fish, { headers });
+        toast.success("Edit successfully");
+      } else {
+        await axios.post(api, fish);
+        toast.success("Create successfully");
+      }
+      console.log(token); // Log token để kiểm tra
+      console.log(fish); // Thêm log để kiểm tra dữ liệu fish
+
+      fetchFishes();
+      formVariable.resetFields();
+      setFileList([]); // Reset danh sách file sau khi submit
+      handleHideModal();
+    } catch (error) {
+      console.error("Error:", error);
+      // Kiểm tra nếu lỗi là 401 và hiển thị thông báo phù hợp
+      if (error.response && error.response.status === 401) {
+        toast.error(
+          "Unauthorized: Access is denied due to invalid credentials."
+        );
+      } else {
+        toast.error("Failed to submit fish");
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -65,52 +120,6 @@ function FishManagementPage() {
 
   const handleOKButton = () => {
     formVariable.submit();
-  };
-
-  const handleSubmitValue = async (fish) => {
-    try {
-      setSubmitting(true);
-
-      // Upload hình ảnh nếu có
-      if (fileList.length > 0) {
-        const file = fileList[0].originFileObj;
-        const imageUrl = await uploadFile(file);
-        fish.thumbnailUrl = imageUrl; // Sử dụng thumbnailUrl để lưu đường dẫn hình ảnh
-      }
-
-      // Lấy token từ localStorage hoặc nơi bạn lưu trữ
-      const yourToken = localStorage.getItem("token");
-
-      const headers = {
-        Authorization: `Bearer ${yourToken}`, // Thay yourToken bằng token thật của bạn
-        // Bạn có thể thêm các headers khác nếu cần
-      };
-
-      if (selectedFish) {
-        await axios.put(`${api}/${selectedFish.id}`, fish, { headers });
-        toast.success("Edit successfully");
-      } else {
-        await axios.post(api, fish, { headers });
-        toast.success("Create successfully");
-      }
-
-      fetchFishes();
-      formVariable.resetFields();
-      setFileList([]); // Reset danh sách file sau khi submit
-      handleHideModal();
-    } catch (error) {
-      console.error("Error:", error);
-      // Kiểm tra nếu lỗi là 401 và hiển thị thông báo phù hợp
-      if (error.response && error.response.status === 401) {
-        toast.error(
-          "Unauthorized: Access is denied due to invalid credentials."
-        );
-      } else {
-        toast.error("Failed to submit fish");
-      }
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const handleRowClick = (record) => {
@@ -201,7 +210,7 @@ function FishManagementPage() {
       dataIndex: "dateOfBirth",
       key: "dateOfBirth",
       align: "center",
-      render: (date) => new Date(date).toLocaleDateString(),
+      render: (date) => moment(date).format("YYYY/MM/DD"),
     },
     {
       title: "Image",
@@ -337,18 +346,12 @@ function FishManagementPage() {
           >
             <InputNumber min={0} />
           </Form.Item>
-
           <Form.Item
             name="dateOfBirth"
             label="Date of Birth"
-            rules={[
-              {
-                required: true,
-                message: "Please enter date of birth",
-              },
-            ]}
+            rules={[{ required: true, message: "Please enter date of birth" }]}
           >
-            <Input type="date" />
+            <DatePicker format="YYYY/MM/DD" />
           </Form.Item>
 
           <Form.Item

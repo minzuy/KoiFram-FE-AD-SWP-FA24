@@ -107,10 +107,9 @@ const AdminHomePage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  // Lấy username từ localStorage
-  const userId = localStorage.getItem("userID");
-  const username = localStorage.getItem("userName");
-
+  const role = localStorage.getItem("role");
+  const name = localStorage.getItem("name");
+  const token = localStorage.getItem("accessToken");
   // Điều hướng khi nhấn Logout
   const navigate = useNavigate();
 
@@ -175,7 +174,7 @@ const AdminHomePage = () => {
           >
             <div className="admin-header">
               <UserOutlined />
-              <h2>Welcome, {username}</h2>
+              <h2>Welcome {name} to manager panel !</h2>
             </div>
             <Button
               type="primary"
@@ -199,13 +198,13 @@ const AdminHomePage = () => {
             {isContentVisible && (
               <div className="content-paragraph ">
                 <p>
-                  Welcome {username} to the Admin Panel ! Click on the left side
-                  of the Sidebar to continue your business !
+                  Welcome {name} to the Admin Panel ! Click on the left side of
+                  the Sidebar to continue your business !
                 </p>
                 <br></br>
                 <p>
-                  Xin chào {username} ! Hãy nhấp vào thanh bên trái để tiếp tục
-                  tác vụ của bạn !
+                  Xin chào {name} ! Hãy nhấp vào thanh bên trái để tiếp tục tác
+                  vụ của bạn !
                 </p>
               </div>
             )}

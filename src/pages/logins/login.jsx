@@ -18,23 +18,23 @@ function LoginPage() {
     setSubmitting(true);
     try {
       // Gửi yêu cầu POST với các thông tin cần thiết
-      const response = await axios.post(api, {
-        username: values.username,
-        password: values.password,
-        name: values.name, // thêm tên từ form
-        phone: values.phone, // thêm số điện thoại từ form
-        address: values.address, // thêm địa chỉ từ form
-        role: "3fa85f64-5717-4562-b3fc-2c963f66afa6", // roleId là cố định
-      });
+      const response = await axios.post(api, values);
 
-      const { name, roleId, token } = response.data;
+      // Lấy các thông tin cần lưu trữ từ phản hồi API
+      const { accessToken, user } = response.data;
+      const { username, name, role } = user;
 
       // Lưu thông tin đăng nhập vào localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("userName", name); // Lưu name
-      localStorage.setItem("roleId", roleId); // Lưu roleId
+      localStorage.setItem("accessToken", accessToken); // Lưu accessToken
+      localStorage.setItem("userName", username); // Lưu username
+      localStorage.setItem("name", name); // Lưu tên
+      localStorage.setItem("role", role); // Lưu vai trò (role)
 
-      navigate("/admin");
+      if (role === "Customer") {
+        navigate("/admin");
+      } else {
+        navigate("/login");
+      }
 
       toast.success("Login Successful!");
     } catch (error) {
